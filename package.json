@@ -1,0 +1,74 @@
+{
+  "name": "@makenew/tsmodule",
+  "version": "2.1.0",
+  "description": "Package skeleton for a TypeScript module.",
+  "type": "module",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "exports": {
+    "import": "./index.js"
+  },
+  "module": "index.js",
+  "sideEffects": false,
+  "keywords": [
+    "node"
+  ],
+  "homepage": "https://github.com/makenew/tsmodule",
+  "bugs": "https://github.com/makenew/tsmodule/issues",
+  "repository": "makenew/tsmodule",
+  "license": "MIT",
+  "author": {
+    "name": "Evan Sosenko",
+    "email": "razorx@evansosenko.com"
+  },
+  "files": [
+    "index.js",
+    "index.js.map",
+    "index.d.ts",
+    "lib",
+    "src",
+    "!test",
+    "!**/*.test.ts"
+  ],
+  "scripts": {
+    "build": "npm run build:ts",
+    "postbuild": "node ./index.js",
+    "build:ts": "tsc --project tsconfig.build.json",
+    "prebuild:ts": "del 'index.*' lib",
+    "postbuild:ts": "tsc-alias --project tsconfig.build.json",
+    "typecheck": "tsc",
+    "test": "c8 ava",
+    "pretest": "tsx src/index.ts",
+    "test:update": "ava --update-snapshots",
+    "test:watch": "ava --watch",
+    "test:debug": "ava debug --break",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.cjs,.mjs,.ts,.tsx .",
+    "prelint": "prettier --check --ignore-path .gitignore .",
+    "postversion": "git push --follow-tags",
+    "example": "tsx examples",
+    "example:inspect": "tsx --inspect examples",
+    "format": "eslint --ignore-path .gitignore --fix --ext .js,.cjs,.mjs,.ts,.tsx .",
+    "preformat": "prettier --write --ignore-path .gitignore .",
+    "report": "c8 report"
+  },
+  "engines": {
+    "node": ">=16.13.0",
+    "npm": ">= 8.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "ava": "^5.0.1",
+    "c8": "^7.11.0",
+    "del-cli": "^5.0.0",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "landlubber": "^1.0.0",
+    "prettier": "^2.3.0",
+    "tsc-alias": "^1.8.2",
+    "tsx": "^3.12.1",
+    "typescript": "^5.0.2"
+  }
+}
