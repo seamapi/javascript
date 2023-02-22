@@ -52,9 +52,6 @@ makenew () {
   read -p '> Package title (My Package): ' mk_title
   read -p '> Package name (@namespace/my-package): ' mk_slug
   read -p '> Short package description (Foos and bars.): ' mk_description
-  read -p '> Author name (Linus Torvalds): ' mk_author
-  read -p '> Author email (linus@example.com): ' mk_email
-  read -p '> GitHub user or organization name (my-user): ' mk_user
   read -p '> GitHub repository name (my-repo): ' mk_repo
 
   sed_delete README.md '10,103d'
@@ -63,10 +60,7 @@ makenew () {
   find_replace "s/^  \"version\": \".*\"/  \"version\": \"0.0.0\"/g"
   find_replace "s/TypeScript Module Package Skeleton/${mk_title}/g"
   find_replace "s/Package skeleton for a TypeScript module\./${mk_description}/g"
-  find_replace "s/Evan Sosenko/${mk_author}/g"
-  find_replace "s/razorx@evansosenko\.com/${mk_email}/g"
   find_replace "s|@seamapi/makenew-tsmodule|${mk_slug}|g"
-  find_replace "s|seamapi/makenew-tsmodule|${mk_user}/${mk_repo}|g"
   find_replace "s|makenew-tsmodule|${mk_repo}|g"
 
   echo

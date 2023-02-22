@@ -226,7 +226,7 @@ To submit a patch:
 
 ## License
 
-This npm package is licensed under the MIT license.
+This npm package is Copyright (c) 2021-2023 Seam Labs, Inc.
 
 ## Warranty
 
