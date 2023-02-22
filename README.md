@@ -19,7 +19,6 @@ Bootstrap a new TypeScript module in five minutes or less.
 - Futuristic debuggable unit testing with [AVA].
 - Code coverage reporting with [Istanbul] and [c8].
 - Continuous testing and package publishing with [GitHub Actions].
-- [Keep a CHANGELOG].
 - Consistent coding with [EditorConfig].
 
 [AVA]: https://github.com/avajs/ava
@@ -29,7 +28,6 @@ Bootstrap a new TypeScript module in five minutes or less.
 [GitHub Actions]: https://github.com/features/actions
 [Istanbul]: https://istanbul.js.org/
 [JavaScript Standard Style]: https://standardjs.com/
-[Keep a CHANGELOG]: https://keepachangelog.com/
 [Node.js]: https://nodejs.org/
 [Prettier]: https://prettier.io/
 [TypeScript]: https://www.typescriptlang.org/
@@ -88,14 +86,6 @@ You can then fetch and merge changes with
 $ git fetch --no-tags upstream
 $ git merge upstream/main
 ```
-
-#### Changelog for this skeleton
-
-Note that `CHANGELOG.md` is just a template for this skeleton.
-The actual changes for this project are documented in the commit history
-and summarized under [Releases].
-
-[Releases]: https://github.com/seamapi/makenew-tsmodule/releases
 
 ## Installation
 

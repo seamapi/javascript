@@ -54,7 +54,7 @@ makenew () {
   read -p '> Short package description (Foos and bars.): ' mk_description
   read -p '> GitHub repository name (my-repo): ' mk_repo
 
-  sed_delete README.md '9,98d'
+  sed_delete README.md '9,88d'
   sed_insert README.md '9i' 'TODO'
 
   find_replace "s/^  \"version\": \".*\"/  \"version\": \"0.0.0\"/g"
