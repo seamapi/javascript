@@ -20,11 +20,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: ${{ needs.build.outputs.artifact_name }}
           path: .
+      - name: Generate release notes
+        id: changelog
+        run: |
+          mkdir tmp
+          outfile=tmp/changelog.txt
+          echo "outfile=${outfile}" >> $GITHUB_OUTPUT
+          npx --package standard-changelog@^2.0.0 --package conventional-changelog-conventionalcommits@^5.0.0 standard-changelog --preset conventionalcommits --release-count 2 --infile $outfile.tmp --outfile $outfile.tmp
+          sed '1,3d' $outfile.tmp > $outfile
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
@@ -32,6 +42,7 @@ jobs:
           fail_on_unmatched_files: true
           prerelease: ${{ contains(github.ref_name, '-') }}
           files: '*.tgz'
+          body_path: ${{ github.workspace }}/${{ steps.changelog.outputs.outfile }}
   github:
     name: GitHub Packages
     uses: ./.github/workflows/_publish.yml
