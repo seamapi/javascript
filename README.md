@@ -20,12 +20,14 @@ Bootstrap a new TypeScript module in five minutes or less.
 - [Prettier] code.
 - Futuristic debuggable unit testing with [AVA].
 - Code coverage reporting with [Istanbul] and [c8].
+- Fully automated version management and package publishing with [semantic-release] and [Conventional Commits].
 - Continuous testing and package publishing with [GitHub Actions].
 - Consistent coding with [EditorConfig].
 - Get PR reviews directly from [code owners].
 
 [AVA]: https://github.com/avajs/ava
 [code owners]: https://github.blog/2017-07-06-introducing-code-owners/
+[Conventional Commits]: https://www.conventionalcommits.org/
 [ECMAScript module]: https://nodejs.org/api/esm.html
 [ESLint]: https://eslint.org/
 [EditorConfig]: https://editorconfig.org/
@@ -35,6 +37,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 [JavaScript Standard Style]: https://standardjs.com/
 [Node.js]: https://nodejs.org/
 [Prettier]: https://prettier.io/
+[semantic-release]: https://semantic-release.gitbook.io/
 [TypeScript]: https://www.typescriptlang.org/
 [c8]: https://github.com/bcoe/c8
 [landlubber]: https://github.com/razor-x/landlubber
@@ -172,6 +175,16 @@ $ npm install
 
 ### Publishing
 
+#### Automatic
+
+New versions are released automatically with [semantic-release].
+as long as commits follow the [Conventional Commits] specification.
+
+[Conventional Commits]: https://www.conventionalcommits.org/
+[semantic-release]: https://semantic-release.gitbook.io/
+
+#### Manual
+
 Publish a new version by triggering a [version workflow_dispatch on GitHub Actions].
 The `version` input will be passed as the first argument to [npm-version].
 
@@ -203,6 +216,9 @@ The following repository secrets must be set on [GitHub Actions]:
 
 ## Contributing
 
+> If using squash merge, edit and ensure the commit message follows the [Conventional Commits] specification.
+> Otherwise, each individual commit must follow the [Conventional Commits] specification.
+
 1. Create your feature branch (`git checkout -b my-new-feature`).
 2. Make changes.
 3. Commit your changes (`git commit -am 'Add some feature'`).
@@ -212,6 +228,8 @@ The following repository secrets must be set on [GitHub Actions]:
 7. Mark your pull request ready for review.
 8. Wait for the required approval from the code owners.
 9. Merge when ready.
+
+[Conventional Commits]: https://www.conventionalcommits.org/
 
 ## License
 
