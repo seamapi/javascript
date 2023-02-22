@@ -170,13 +170,18 @@ $ npm install
 
 ### Publishing
 
-Use the [`npm version`][npm-version] command to release a new version.
-This will push a new git tag which will trigger a GitHub action.
+Publish a new version by triggering a [version workflow_dispatch on GitHub Actions].
+The `version` input will be passed as the first argument to [npm-version].
 
-Publishing may be triggered using a [workflow_dispatch on GitHub Actions].
+This may be done on the web or using the [GitHub CLI] with
 
+```
+$ gh workflow run version.yml --raw-field version=<version>
+```
+
+[GitHub CLI]: https://cli.github.com/
 [npm-version]: https://docs.npmjs.com/cli/version
-[workflow_dispatch on GitHub Actions]: https://github.com/seamapi/makenew-tsmodule/actions?query=workflow%3Aversion
+[version workflow_dispatch on GitHub Actions]: https://github.com/seamapi/makenew-tsmodule/actions?query=workflow%3Aversion
 
 ## GitHub Actions
 
