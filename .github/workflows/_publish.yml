@@ -29,6 +29,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           install_dependencies: 'false'
+          node_auth_token: ${{ secrets.GH_TOKEN }}
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:

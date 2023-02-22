@@ -35,6 +35,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ matrix.node }}
+          node_auth_token: ${{ secrets.GH_TOKEN }}
       - name: Test
         run: npm test
   lint:
@@ -54,6 +55,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ matrix.node }}
+          node_auth_token: ${{ secrets.GH_TOKEN }}
       - name: Lint
         run: npm run lint
   build:
@@ -111,7 +113,18 @@ jobs:
           contents: |
             import '@seamapi/makenew-tsmodule'
       - name: Install
-        run: npm install --save ${{ steps.packages.outputs.paths }}
+        run: npm install --ignore-scripts --save ${{ steps.packages.outputs.paths }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Rebuild Node.js modules
+        shell: bash
+        run: npm rebuild
+      - name: Run postinstall script
+        shell: bash
+        run: npm run postinstall --if-present
+      - name: Run prepare script
+        shell: bash
+        run: npm run prepare --if-present
       - name: Run
         run: node index.js
   typecheck:
@@ -131,5 +144,6 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ matrix.node }}
+          node_auth_token: ${{ secrets.GH_TOKEN }}
       - name: Typecheck
         run: npm run typecheck

@@ -26,6 +26,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ inputs.node_version }}
+          node_auth_token: ${{ secrets.GH_TOKEN }}
       - name: Build
         run: npm run build
       - name: Package

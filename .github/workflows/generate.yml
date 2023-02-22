@@ -32,7 +32,9 @@ jobs:
         with:
           install_dependencies: 'false'
       - name: Normalize package-lock.json
-        run: npm install
+        run: npm install --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

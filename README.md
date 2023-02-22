@@ -13,6 +13,8 @@ Bootstrap a new TypeScript module in five minutes or less.
 - Strongly typed JavaScript with [TypeScript].
 - Native [ECMAScript module] compatible with [Node.js].
 - Package management with [npm].
+- Use private packages from [GitHub Packages].
+- Publish as a private package to [GitHub Packages].
 - Examples with configurable options and arguments powered by [yargs] with [landlubber].
 - Linting with the [JavaScript Standard Style] using [ESLint].
 - [Prettier] code.
@@ -28,6 +30,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 [ESLint]: https://eslint.org/
 [EditorConfig]: https://editorconfig.org/
 [GitHub Actions]: https://github.com/features/actions
+[GitHub Packages]: https://github.com/features/packages
 [Istanbul]: https://istanbul.js.org/
 [JavaScript Standard Style]: https://standardjs.com/
 [Node.js]: https://nodejs.org/
@@ -159,7 +162,8 @@ Set the active version for each shell session with
 $ nvm use
 ```
 
-Install the development dependencies with
+Ensure you are authenticated with the [GitHub Packages npm registry],
+then install the development dependencies with
 
 ```
 $ npm install
@@ -169,6 +173,7 @@ $ npm install
 [Node.js debugging]: https://nodejs.org/en/docs/guides/debugging-getting-started/
 [npm]: https://www.npmjs.com/
 [nvm]: https://github.com/creationix/nvm
+[GitHub Packages npm registry]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-to-github-packages
 
 ### Publishing
 
