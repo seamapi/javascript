@@ -196,19 +196,12 @@ _GitHub Actions should already be configured: this section is for reference only
 
 The following repository secrets must be set on [GitHub Actions]:
 
-These must be set manually.
-
-### Secrets for Optional GitHub Actions
-
-The version and format GitHub actions
-require a user with write access to the repository.
-Set these additional secrets to enable the action:
-
-- `GH_TOKEN`: A personal access token for the user.
-- `GIT_USER_NAME`: The GitHub user's real name.
-- `GIT_USER_EMAIL`: The GitHub user's email.
-- `GPG_PRIVATE_KEY`: The GitHub user's [GPG private key].
-- `GPG_PASSPHRASE`: The GitHub user's GPG passphrase.
+- `GH_TOKEN`: A personal access token for the bot user with
+  `packages:write` and `contents:write` permission.
+- `GIT_USER_NAME`: The GitHub bot user's real name.
+- `GIT_USER_EMAIL`: The GitHub bot user's email.
+- `GPG_PRIVATE_KEY`: The GitHub bot user's [GPG private key].
+- `GPG_PASSPHRASE`: The GitHub bot user's GPG passphrase.
 
 [GitHub Actions]: https://github.com/features/actions
 [GPG private key]: https://github.com/marketplace/actions/import-gpg#prerequisites
