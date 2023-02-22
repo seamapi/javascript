@@ -109,7 +109,7 @@ jobs:
           write-mode: overwrite
           path: index.js
           contents: |
-            import '@makenew/tsmodule'
+            import '@seamapi/makenew-tsmodule'
       - name: Install
         run: npm install --save ${{ steps.packages.outputs.paths }}
       - name: Run

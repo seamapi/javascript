@@ -1,7 +1,7 @@
 # TypeScript Module Package Skeleton
 
-[![npm](https://img.shields.io/npm/v/@makenew/tsmodule.svg)](https://www.npmjs.com/package/@makenew/tsmodule)
-[![GitHub Actions](https://github.com/makenew/tsmodule/actions/workflows/check.yml/badge.svg)](https://github.com/makenew/tsmodule/actions/workflows/check.yml)
+[![npm](https://img.shields.io/npm/v/@seamapi/makenew-tsmodule.svg)](https://www.npmjs.com/package/@seamapi/makenew-tsmodule)
+[![GitHub Actions](https://github.com/seamapi/makenew-tsmodule/actions/workflows/check.yml/badge.svg)](https://github.com/seamapi/makenew-tsmodule/actions/workflows/check.yml)
 
 Package skeleton for a TypeScript module.
 
@@ -46,7 +46,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 1. Create an empty (**non-initialized**) repository on GitHub.
 2. Clone the main branch of this repository with
    ```
-   $ git clone --single-branch git@github.com:makenew/tsmodule.git <new-node-lib>
+   $ git clone --single-branch git@github.com:seamapi/makenew-tsmodule.git <new-node-lib>
    $ cd <new-node-lib>
    ```
    Optionally, reset to the latest version with
@@ -84,7 +84,7 @@ you can fetch and merge in changes from this repository.
 Add this as a new remote with
 
 ```
-$ git remote add upstream git@github.com:makenew/tsmodule.git
+$ git remote add upstream git@github.com:seamapi/makenew-tsmodule.git
 ```
 
 You can then fetch and merge changes with
@@ -100,14 +100,14 @@ Note that `CHANGELOG.md` is just a template for this skeleton.
 The actual changes for this project are documented in the commit history
 and summarized under [Releases].
 
-[Releases]: https://github.com/makenew/tsmodule/releases
+[Releases]: https://github.com/seamapi/makenew-tsmodule/releases
 
 ## Installation
 
 Add this as a dependency to your project using [npm] with
 
 ```
-$ npm install @makenew/tsmodule
+$ npm install @seamapi/makenew-tsmodule
 ```
 
 [npm]: https://www.npmjs.com/
@@ -117,8 +117,8 @@ $ npm install @makenew/tsmodule
 ### Quickstart
 
 ```
-$ git clone https://github.com/makenew/tsmodule.git
-$ cd tsmodule
+$ git clone https://github.com/seamapi/makenew-tsmodule.git
+$ cd makenew-tsmodule
 $ nvm install
 $ npm install
 ```
@@ -143,10 +143,10 @@ The [source code] is hosted on GitHub.
 Clone the project with
 
 ```
-$ git clone git@github.com:makenew/tsmodule.git
+$ git clone git@github.com:seamapi/makenew-tsmodule.git
 ```
 
-[source code]: https://github.com/makenew/tsmodule
+[source code]: https://github.com/seamapi/makenew-tsmodule
 
 ### Requirements
 
@@ -184,7 +184,7 @@ This will push a new git tag which will trigger a GitHub action.
 Publishing may be triggered using a [workflow_dispatch on GitHub Actions].
 
 [npm-version]: https://docs.npmjs.com/cli/version
-[workflow_dispatch on GitHub Actions]: https://github.com/makenew/tsmodule/actions?query=workflow%3Aversion
+[workflow_dispatch on GitHub Actions]: https://github.com/seamapi/makenew-tsmodule/actions?query=workflow%3Aversion
 
 ## GitHub Actions
 
@@ -217,7 +217,7 @@ Please submit and comment on bug reports and feature requests.
 
 To submit a patch:
 
-1. Fork it (https://github.com/makenew/tsmodule/fork).
+1. Fork it (https://github.com/seamapi/makenew-tsmodule/fork).
 2. Create your feature branch (`git checkout -b my-new-feature`).
 3. Make changes.
 4. Commit your changes (`git commit -am 'Add some feature'`).

@@ -65,9 +65,9 @@ makenew () {
   find_replace "s/Package skeleton for a TypeScript module\./${mk_description}/g"
   find_replace "s/Evan Sosenko/${mk_author}/g"
   find_replace "s/razorx@evansosenko\.com/${mk_email}/g"
-  find_replace "s|@makenew/tsmodule|${mk_slug}|g"
-  find_replace "s|makenew/tsmodule|${mk_user}/${mk_repo}|g"
-  find_replace "s|tsmodule|${mk_repo}|g"
+  find_replace "s|@seamapi/makenew-tsmodule|${mk_slug}|g"
+  find_replace "s|seamapi/makenew-tsmodule|${mk_user}/${mk_repo}|g"
+  find_replace "s|makenew-tsmodule|${mk_repo}|g"
 
   echo
   echo 'Replacing boilerplate.'
