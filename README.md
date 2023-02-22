@@ -68,9 +68,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 6. Ensure the GitHub action passes,
    then publish the initial version of the package with
    ```
-   $ nvm install
-   $ npm install
-   $ npm version patch
+   $ gh workflow run version.yml --raw-field version=patch
    ```
 
 ### Updating from this skeleton
