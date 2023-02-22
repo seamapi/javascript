@@ -54,8 +54,8 @@ makenew () {
   read -p '> Short package description (Foos and bars.): ' mk_description
   read -p '> GitHub repository name (my-repo): ' mk_repo
 
-  sed_delete README.md '10,103d'
-  sed_insert README.md '10i' 'TODO'
+  sed_delete README.md '9,101d'
+  sed_insert README.md '9i' 'TODO'
 
   find_replace "s/^  \"version\": \".*\"/  \"version\": \"0.0.0\"/g"
   find_replace "s/TypeScript Module Package Skeleton/${mk_title}/g"

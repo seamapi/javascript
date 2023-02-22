@@ -1,6 +1,5 @@
 # TypeScript Module Package Skeleton
 
-[![npm](https://img.shields.io/npm/v/@seamapi/makenew-tsmodule.svg)](https://www.npmjs.com/package/@seamapi/makenew-tsmodule)
 [![GitHub Actions](https://github.com/seamapi/makenew-tsmodule/actions/workflows/check.yml/badge.svg)](https://github.com/seamapi/makenew-tsmodule/actions/workflows/check.yml)
 
 Package skeleton for a TypeScript module.
@@ -22,7 +21,6 @@ Bootstrap a new TypeScript module in five minutes or less.
 - Continuous testing and package publishing with [GitHub Actions].
 - [Keep a CHANGELOG].
 - Consistent coding with [EditorConfig].
-- Badges from [Shields.io].
 
 [AVA]: https://github.com/avajs/ava
 [ECMAScript module]: https://nodejs.org/api/esm.html
@@ -34,7 +32,6 @@ Bootstrap a new TypeScript module in five minutes or less.
 [Keep a CHANGELOG]: https://keepachangelog.com/
 [Node.js]: https://nodejs.org/
 [Prettier]: https://prettier.io/
-[Shields.io]: https://shields.io/
 [TypeScript]: https://www.typescriptlang.org/
 [c8]: https://github.com/bcoe/c8
 [landlubber]: https://github.com/razor-x/landlubber
@@ -104,7 +101,14 @@ and summarized under [Releases].
 
 ## Installation
 
-Add this as a dependency to your project using [npm] with
+Add this as a dependency to your project using [npm]
+by adding the line below to your project's `.npmrc`,
+
+```
+@seamapi:registry=https://npm.pkg.github.com
+```
+
+and installing the package with
 
 ```
 $ npm install @seamapi/makenew-tsmodule
@@ -191,8 +195,6 @@ Publishing may be triggered using a [workflow_dispatch on GitHub Actions].
 _GitHub Actions should already be configured: this section is for reference only._
 
 The following repository secrets must be set on [GitHub Actions]:
-
-- `NPM_TOKEN`: npm token for installing and publishing packages.
 
 These must be set manually.
 
