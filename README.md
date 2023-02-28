@@ -118,11 +118,6 @@ $ git clone https://github.com/seamapi/makenew-tsmodule.git
 $ cd makenew-tsmodule
 $ nvm install
 $ npm install
-```
-
-Run the command below in a separate terminal window:
-
-```
 $ npm run test:watch
 ```
 
