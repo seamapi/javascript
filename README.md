@@ -24,6 +24,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 - Continuous testing and package publishing with [GitHub Actions].
 - Consistent coding with [EditorConfig].
 - Get PR reviews directly from [code owners].
+- Automatically close [stale] Issues and Pull Requests.
 
 [AVA]: https://github.com/avajs/ava
 [code owners]: https://github.blog/2017-07-06-introducing-code-owners/
@@ -38,6 +39,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 [Node.js]: https://nodejs.org/
 [Prettier]: https://prettier.io/
 [semantic-release]: https://semantic-release.gitbook.io/
+[stale]: https://github.com/marketplace/stale
 [TypeScript]: https://www.typescriptlang.org/
 [c8]: https://github.com/bcoe/c8
 [landlubber]: https://github.com/razor-x/landlubber
