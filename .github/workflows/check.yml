@@ -145,7 +145,7 @@ jobs:
         with:
           node_version: ${{ matrix.node }}
           node_auth_token: ${{ secrets.GH_TOKEN }}
-      - name: Typecheck
+      - name: Check types
         run: npm run typecheck
   dependencies:
     name: Dependencies
