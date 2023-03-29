@@ -20,7 +20,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 - [Prettier] code.
 - Futuristic debuggable unit testing with [AVA].
 - Code coverage reporting with [Istanbul] and [c8].
-- Fully automated version management and package publishing with [semantic-release] and [Conventional Commits].
+- Fully automated version management and package publishing with [semantic-release].
 - Continuous testing and package publishing with [GitHub Actions].
 - Consistent coding with [EditorConfig].
 - Start coding instantly with [GitHub Codespaces].
@@ -29,7 +29,6 @@ Bootstrap a new TypeScript module in five minutes or less.
 
 [AVA]: https://github.com/avajs/ava
 [code owners]: https://github.blog/2017-07-06-introducing-code-owners/
-[Conventional Commits]: https://www.conventionalcommits.org/
 [ECMAScript module]: https://nodejs.org/api/esm.html
 [ESLint]: https://eslint.org/
 [EditorConfig]: https://editorconfig.org/
@@ -182,9 +181,9 @@ $ npm install
 #### Automatic
 
 New versions are released automatically with [semantic-release].
-as long as commits follow the [Conventional Commits] specification.
+as long as commits follow the [Angular Commit Message Conventions].
 
-[Conventional Commits]: https://www.conventionalcommits.org/
+[Angular Commit Message Conventions]: https://semantic-release.gitbook.io/semantic-release/#commit-message-format
 [semantic-release]: https://semantic-release.gitbook.io/
 
 #### Manual
@@ -220,8 +219,8 @@ The following repository secrets must be set on [GitHub Actions]:
 
 ## Contributing
 
-> If using squash merge, edit and ensure the commit message follows the [Conventional Commits] specification.
-> Otherwise, each individual commit must follow the [Conventional Commits] specification.
+> If using squash merge, edit and ensure the commit message follows the [Angular Commit Message Conventions] specification.
+> Otherwise, each individual commit must follow the [Angular Commit Message Conventions] specification.
 
 1. Create your feature branch (`git checkout -b my-new-feature`).
 2. Make changes.
@@ -233,7 +232,7 @@ The following repository secrets must be set on [GitHub Actions]:
 8. Wait for the required approval from the code owners.
 9. Merge when ready.
 
-[Conventional Commits]: https://www.conventionalcommits.org/
+[Angular Commit Message Conventions]: https://semantic-release.gitbook.io/semantic-release/#commit-message-format
 
 ## License
 
