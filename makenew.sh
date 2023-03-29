@@ -51,7 +51,7 @@ makenew () {
   echo 'Example values are shown in parentheses.'
   read -p '> Your GitHub username (my-user): ' mk_codeowner
   read -p '> Package title (My Package): ' mk_title
-  read -p '> Package name (@namespace/my-package): ' mk_slug
+  read -p '> Package name (@seamapi/my-package): ' mk_slug
   read -p '> Short package description (Foos and bars.): ' mk_description
   read -p '> GitHub repository name (my-repo): ' mk_repo
 
