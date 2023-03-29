@@ -23,6 +23,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 - Fully automated version management and package publishing with [semantic-release] and [Conventional Commits].
 - Continuous testing and package publishing with [GitHub Actions].
 - Consistent coding with [EditorConfig].
+- Start coding instantly with [GitHub Codespaces].
 - Get PR reviews directly from [code owners].
 - Automatically close [stale] Issues and Pull Requests.
 
@@ -33,6 +34,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 [ESLint]: https://eslint.org/
 [EditorConfig]: https://editorconfig.org/
 [GitHub Actions]: https://github.com/features/actions
+[GitHub Codespaces]: https://github.com/features/packages
 [GitHub Packages]: https://github.com/features/packages
 [Istanbul]: https://istanbul.js.org/
 [JavaScript Standard Style]: https://standardjs.com/
