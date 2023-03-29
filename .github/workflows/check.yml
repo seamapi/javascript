@@ -147,3 +147,16 @@ jobs:
           node_auth_token: ${{ secrets.GH_TOKEN }}
       - name: Typecheck
         run: npm run typecheck
+  dependencies:
+    name: Dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          node_auth_token: ${{ secrets.GH_TOKEN }}
+      - name: Analyze dependencies
+        run: npm run dependencies

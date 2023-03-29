@@ -20,6 +20,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 - [Prettier] code.
 - Futuristic debuggable unit testing with [AVA].
 - Code coverage reporting with [Istanbul] and [c8].
+- Robust static dependency analysis with [DPDM].
 - Fully automated version management and package publishing with [semantic-release].
 - Continuous testing and package publishing with [GitHub Actions].
 - Consistent coding with [EditorConfig].
@@ -29,6 +30,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 
 [AVA]: https://github.com/avajs/ava
 [code owners]: https://github.blog/2017-07-06-introducing-code-owners/
+[DPDM]: https://github.com/acrazing/dpdm
 [ECMAScript module]: https://nodejs.org/api/esm.html
 [ESLint]: https://eslint.org/
 [EditorConfig]: https://editorconfig.org/
