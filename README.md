@@ -89,14 +89,14 @@ you can fetch and merge in changes from this repository.
 Add this as a new remote with
 
 ```
-$ git remote add upstream git@github.com:seamapi/makenew-tsmodule.git
+$ git remote add makenew git@github.com:seamapi/makenew-tsmodule.git
 ```
 
 You can then fetch and merge changes with
 
 ```
-$ git fetch --no-tags upstream
-$ git merge upstream/main
+$ git fetch --no-tags makenew
+$ git merge makenew/main
 ```
 
 ## Installation
