@@ -53,8 +53,8 @@ Bootstrap a new TypeScript module in five minutes or less.
 1. Create an empty (**non-initialized**) repository on GitHub.
 2. Clone the main branch of this repository with
    ```
-   $ git clone --single-branch git@github.com:seamapi/makenew-tsmodule.git <new-node-lib>
-   $ cd <new-node-lib>
+   $ git clone --single-branch git@github.com:seamapi/makenew-tsmodule.git <new-ts-module>
+   $ cd <new-ts-module>
    ```
    Optionally, reset to the latest version with
    ```
