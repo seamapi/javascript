@@ -16,7 +16,7 @@
   "homepage": "https://github.com/seamapi/makenew-tsmodule",
   "bugs": "https://github.com/seamapi/makenew-tsmodule/issues",
   "repository": "seamapi/makenew-tsmodule",
-  "license": "SEE LICENSE IN LICENSE.txt",
+  "license": "MIT",
   "author": {
     "name": "Seam Labs, Inc.",
     "email": "devops@getseam.com"
