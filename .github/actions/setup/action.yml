@@ -3,9 +3,6 @@ name: Setup
 description: Setup Node.js and install dependencies.
 
 inputs:
-  node_auth_token:
-    description: The Node.js auth token.
-    required: true
   node_version:
     description: The Node.js version.
     required: false
@@ -13,7 +10,7 @@ inputs:
   registry_url:
     description: The Node.js package registry URL.
     required: false
-    default: https://npm.pkg.github.com
+    default: https://registry.npmjs.org
   install_dependencies:
     description: Install dependencies.
     required: false
@@ -38,15 +35,4 @@ runs:
     - name: Install dependencies
       if: inputs.install_dependencies == 'true'
       shell: bash
-      run: npm ci --ignore-scripts
-      env:
-        NODE_AUTH_TOKEN: ${{ inputs.node_auth_token }}
-    - name: Rebuild Node.js modules
-      shell: bash
-      run: npm rebuild
-    - name: Run postinstall script
-      shell: bash
-      run: npm run postinstall --if-present
-    - name: Run prepare script
-      shell: bash
-      run: npm run prepare --if-present
+      run: npm ci
