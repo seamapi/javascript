@@ -41,7 +41,7 @@ jobs:
       - name: Publish
         uses: rxfork/npm-publish@v1
         with:
-          access: restricted
+          access: public
           target: ${{ steps.meta.outputs.tgz }}
           token: ${{ secrets.registry_token }}
           registry: ${{ inputs.registry_host }}

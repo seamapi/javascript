@@ -14,7 +14,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 - Native [ECMAScript module] compatible with [Node.js].
 - Package management with [npm].
 - Use private packages from [GitHub Packages].
-- Publish as a private package to [GitHub Packages].
+- Publish as a package to [GitHub Packages].
 - Examples with configurable options and arguments powered by [yargs] with [landlubber].
 - Linting with the [JavaScript Standard Style] using [ESLint].
 - [Prettier] code.
