@@ -1,5 +1,6 @@
 # TypeScript Module Package Skeleton
 
+[![npm](https://img.shields.io/npm/v/@seamapi/makenew-tsmodule.svg)](https://www.npmjs.com/package/@seamapi/makenew-tsmodule)
 [![GitHub Actions](https://github.com/seamapi/makenew-tsmodule/actions/workflows/check.yml/badge.svg)](https://github.com/seamapi/makenew-tsmodule/actions/workflows/check.yml)
 
 Package skeleton for a TypeScript module.
@@ -14,7 +15,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 - Native [ECMAScript module] compatible with [Node.js].
 - Package management with [npm].
 - Use private packages from [GitHub Packages].
-- Publish as a package to [GitHub Packages].
+- Publish as a package to [GitHub Packages] and [npm].
 - Examples with configurable options and arguments powered by [yargs] with [landlubber].
 - Linting with the [JavaScript Standard Style] using [ESLint].
 - [Prettier] code.
@@ -27,6 +28,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 - Start coding instantly with [GitHub Codespaces].
 - Get PR reviews directly from [code owners].
 - Automatically close [stale] Issues and Pull Requests.
+- Badges from [Shields.io].
 
 [AVA]: https://github.com/avajs/ava
 [code owners]: https://github.blog/2017-07-06-introducing-code-owners/
@@ -42,6 +44,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 [Node.js]: https://nodejs.org/
 [Prettier]: https://prettier.io/
 [semantic-release]: https://semantic-release.gitbook.io/
+[Shields.io]: https://shields.io/
 [stale]: https://github.com/marketplace/stale
 [TypeScript]: https://www.typescriptlang.org/
 [c8]: https://github.com/bcoe/c8
@@ -102,14 +105,7 @@ $ git merge makenew/main
 
 ## Installation
 
-Add this as a dependency to your project using [npm]
-by adding the line below to your project's `.npmrc`,
-
-```
-@seamapi:registry=https://npm.pkg.github.com
-```
-
-and installing the package with
+Add this as a dependency to your project using [npm] with
 
 ```
 $ npm install @seamapi/makenew-tsmodule
@@ -209,6 +205,7 @@ _GitHub Actions should already be configured: this section is for reference only
 
 The following repository secrets must be set on [GitHub Actions]:
 
+- `NPM_TOKEN`: npm token for installing and publishing packages.
 - `GH_TOKEN`: A personal access token for the bot user with
   `packages:write` and `contents:write` permission.
 - `GIT_USER_NAME`: The GitHub bot user's real name.

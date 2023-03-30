@@ -43,6 +43,15 @@ jobs:
           prerelease: ${{ contains(github.ref_name, '-') }}
           files: '*.tgz'
           body_path: ${{ github.workspace }}/${{ steps.changelog.outputs.outfile }}
+  npm:
+    name: npm
+    uses: ./.github/workflows/_publish.yml
+    needs: build
+    with:
+      artifact_name: ${{ needs.build.outputs.artifact_name }}
+      registry_host: https://registry.npmjs.org
+    secrets:
+      registry_token: ${{ secrets.NPM_TOKEN }}
   github:
     name: GitHub Packages
     uses: ./.github/workflows/_publish.yml
