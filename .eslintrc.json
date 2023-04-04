@@ -27,13 +27,6 @@
     ],
     "import/extensions": ["error", "ignorePackages"],
     "import/no-duplicates": ["error", { "prefer-inline": true }],
-    "sort-imports": [
-      "error",
-      {
-        "ignoreDeclarationSort": true,
-        "allowSeparatedGroups": true
-      }
-    ],
     "simple-import-sort/imports": [
       "error",
       {
