@@ -64,7 +64,7 @@ makenew () {
   find_replace "s/^  \"version\": \".*\"/  \"version\": \"0.0.0\"/g"
   find_replace "s/TypeScript Module Package Skeleton/${mk_title}/g"
   find_replace "s/Package skeleton for a TypeScript module\./${mk_description}/g"
-  find_replace "s/@seambot/${mk_codeowner}/g"
+  find_replace "s/@seambot/@${mk_codeowner}/g"
   find_replace "s|@seamapi/makenew-tsmodule|${mk_slug}|g"
   find_replace "s|makenew-tsmodule|${mk_repo}|g"
 
