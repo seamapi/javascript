@@ -28,11 +28,14 @@ jobs:
     steps:
       - name: Create repository
         run: |
+          gh extension install mislav/gh-repo-collab
           gh repo create --internal --disable-wiki --description "$DESCRIPTION" $REPO
           gh repo edit $REPO --delete-branch-on-merge
           gh repo edit $REPO --enable-projects=false
+          gh repo-collab add $REPO $CODEOWNER --permission admin
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          CODEOWNER: ${{ github.event.inputs.codeowner }}
           REPO: seamapi/${{ github.event.inputs.repo }}
           DESCRIPTION: ${{ github.event.inputs.description }}
   bootstrap:
