@@ -37,6 +37,7 @@ stage_env () {
   git remote rm origin
   echo
   git rm -f makenew.sh
+  git rm -f .github/workflows/makenew.yml
   echo
   echo 'Staging changes.'
   git add --all
@@ -46,16 +47,18 @@ stage_env () {
 }
 
 makenew () {
-  echo 'Answer all prompts.'
-  echo 'There are no defaults.'
-  echo 'Example values are shown in parentheses.'
-  read -p '> Your GitHub username (my-user): ' mk_codeowner
-  read -p '> Package title (My Package): ' mk_title
-  read -p '> Package name (@seamapi/my-package): ' mk_slug
-  read -p '> Short package description (Foos and bars.): ' mk_description
-  read -p '> GitHub repository name (my-repo): ' mk_repo
+  if [[ -z "${CI:-}" ]]; then
+    echo 'Answer all prompts.'
+    echo 'There are no defaults.'
+    echo 'Example values are shown in parentheses.'
+    read -p '> Your GitHub username (my-user): ' mk_codeowner
+    read -p '> GitHub repository name (new-repo): ' mk_repo
+    read -p '> Package name (@seamapi/new-package): ' mk_slug
+    read -p '> Package title (New Package): ' mk_title
+    read -p '> Short package description (Foos and bars.): ' mk_description
+  fi
 
-  sed_delete README.md '9,101d'
+  sed_delete README.md '9,78d'
   sed_insert README.md '9i' 'TODO'
 
   find_replace "s/^  \"version\": \".*\"/  \"version\": \"0.0.0\"/g"

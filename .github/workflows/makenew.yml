@@ -1,0 +1,87 @@
+---
+name: Make New
+
+on:
+  workflow_dispatch:
+    inputs:
+      codeowner:
+        description: Your GitHub username (my-user)
+        required: true
+      repo:
+        description: GitHub repository name (new-repo)
+        required: true
+      slug:
+        description: Package name (@seamapi/new-package)
+        required: true
+      title:
+        description: Package title (New Package)
+        required: true
+      description:
+        description: Short package description (Foos and bars.)
+        required: true
+
+jobs:
+  repository:
+    name: Create new repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Create repository
+        run: gh repo create --internal $REPO
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          REPO: seamapi/${{ github.event.inputs.repo }}
+  bootstrap:
+    name: Bootstrap code
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: repository
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_committer_name: ${{ secrets.GIT_USER_NAME }}
+          git_committer_email: ${{ secrets.GIT_USER_EMAIL }}
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      - name: Replace makenew boilerplate
+        run: ./makenew.sh
+        env:
+          CI: 'true'
+          mk_codeowner: ${{ github.event.inputs.codeowner }}
+          mk_repo: ${{ github.event.inputs.repo }}
+          mk_slug: ${{ github.event.inputs.slug }}
+          mk_title: ${{ github.event.inputs.title }}
+          mk_description: ${{ github.event.inputs.description }}
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Replace makenew boilerplate
+          commit_user_name: ${{ secrets.GIT_USER_NAME }}
+          commit_user_email: ${{ secrets.GIT_USER_EMAIL }}
+          commit_author: ${{ secrets.GIT_USER_NAME }} <${{ secrets.GIT_USER_EMAIL }}>
+      - name: Push
+        run: |
+          git remote add origin $ORIGIN
+          git push -u origin main
+        env:
+          ORIGIN: git@github.com:seamapi/${{ github.event.inputs.repo }}.git
+  version:
+    name: Cut initial version
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: bootstrap
+    steps:
+      - name: Cut version
+        run: gh workflow run version.yml --repo $REPO --raw-field version=patch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          REPO: seamapi/${{ github.event.inputs.repo }}
