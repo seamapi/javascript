@@ -4,9 +4,6 @@ name: Make New
 on:
   workflow_dispatch:
     inputs:
-      codeowner:
-        description: Your GitHub username (my-user)
-        required: true
       repo:
         description: GitHub repository name (new-repo)
         required: true
@@ -35,7 +32,7 @@ jobs:
           gh repo-collab add $REPO $CODEOWNER --permission admin
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          CODEOWNER: ${{ github.event.inputs.codeowner }}
+          CODEOWNER: ${{ github.actor }}
           REPO: seamapi/${{ github.event.inputs.repo }}
           DESCRIPTION: ${{ github.event.inputs.description }}
   bootstrap:
@@ -62,7 +59,7 @@ jobs:
         run: ./makenew.sh
         env:
           CI: 'true'
-          mk_codeowner: ${{ github.event.inputs.codeowner }}
+          mk_codeowner: ${{ github.actor }}
           mk_repo: ${{ github.event.inputs.repo }}
           mk_slug: ${{ github.event.inputs.slug }}
           mk_title: ${{ github.event.inputs.title }}
