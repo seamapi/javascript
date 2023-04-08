@@ -7,9 +7,6 @@ on:
       repo:
         description: GitHub repository name (new-repo)
         required: true
-      slug:
-        description: Package name (@seamapi/new-package)
-        required: true
       title:
         description: Package title (New Package)
         required: true
@@ -61,7 +58,7 @@ jobs:
           CI: 'true'
           mk_codeowner: ${{ github.actor }}
           mk_repo: ${{ github.event.inputs.repo }}
-          mk_slug: ${{ github.event.inputs.slug }}
+          mk_slug: '@seamapi/${{ github.event.inputs.repo }}'
           mk_title: ${{ github.event.inputs.title }}
           mk_description: ${{ github.event.inputs.description }}
       - name: Set origin
