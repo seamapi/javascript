@@ -9,7 +9,7 @@ find_replace () {
 }
 
 sed_insert () {
-  sed -i.sedbak -e "$2\\"$'\n'"$3"$'\n' $1
+  sed -i.sedbak -e "$2\\""$3" $1
   rm $1.sedbak
 }
 
