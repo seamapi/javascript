@@ -33,7 +33,7 @@ jobs:
           REPO: seamapi/${{ github.event.inputs.repo }}
           DESCRIPTION: ${{ github.event.inputs.description }}
   bootstrap:
-    name: Bootstrap code
+    name: Bootstrap repository
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: repository
