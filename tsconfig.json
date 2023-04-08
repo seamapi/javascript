@@ -22,6 +22,7 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
     "paths": {
       "index.js": ["./src/index.ts"],
       "lib/*": ["./src/lib/*"]
