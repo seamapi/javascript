@@ -53,36 +53,13 @@ Bootstrap a new TypeScript module in five minutes or less.
 
 ### Bootstrapping a new project
 
-1. Create an empty (**non-initialized**) repository on GitHub.
-2. Clone the main branch of this repository with
-   ```
-   $ git clone --single-branch git@github.com:seamapi/makenew-tsmodule.git <new-ts-module>
-   $ cd <new-ts-module>
-   ```
-   Optionally, reset to the latest version with
-   ```
-   $ git reset --hard <version-tag>
-   ```
-3. Run
-   ```
-   $ ./makenew.sh
-   ```
-   This will replace the boilerplate, delete itself,
-   remove the git remote, remove upstream tags,
-   and stage changes for commit.
-4. Create the required GitHub repository secrets.
-5. Review, commit, and push the changes to GitHub with
-   ```
-   $ git diff --cached
-   $ git commit -m "Replace makenew boilerplate"
-   $ git remote add origin git@github.com:<user>/<new-node-lib>.git
-   $ git push -u origin main
-   ```
-6. Ensure the GitHub action passes,
-   then publish the initial version of the package with
-   ```
-   $ gh workflow run version.yml --raw-field version=patch
-   ```
+1. [Trigger a makenew workflow from this repository][makenew workflow]. 🚀
+   - Provide a value for each required input.
+   - There are no defaults.
+   - Example values are shown in parentheses.
+2. When the workflow completes, clone your new repo and start coding!
+
+[makenew workflow]: https://github.com/seamapi/makenew-tsmodule/actions/workflows/makenew.yml
 
 ### Updating from this skeleton
 

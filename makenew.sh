@@ -9,7 +9,7 @@ find_replace () {
 }
 
 sed_insert () {
-  sed -i.sedbak -e "$2\\"$'\n'"$3"$'\n' $1
+  sed -i.sedbak -e "$2\\""$3" $1
   rm $1.sedbak
 }
 
@@ -37,6 +37,7 @@ stage_env () {
   git remote rm origin
   echo
   git rm -f makenew.sh
+  git rm -f .github/workflows/makenew.yml
   echo
   echo 'Staging changes.'
   git add --all
@@ -46,22 +47,24 @@ stage_env () {
 }
 
 makenew () {
-  echo 'Answer all prompts.'
-  echo 'There are no defaults.'
-  echo 'Example values are shown in parentheses.'
-  read -p '> Your GitHub username (my-user): ' mk_codeowner
-  read -p '> Package title (My Package): ' mk_title
-  read -p '> Package name (@seamapi/my-package): ' mk_slug
-  read -p '> Short package description (Foos and bars.): ' mk_description
-  read -p '> GitHub repository name (my-repo): ' mk_repo
+  if [[ -z "${CI:-}" ]]; then
+    echo 'Answer all prompts.'
+    echo 'There are no defaults.'
+    echo 'Example values are shown in parentheses.'
+    read -p '> Your GitHub username (my-user): ' mk_codeowner
+    read -p '> GitHub repository name (new-repo): ' mk_repo
+    read -p '> Package name (@seamapi/new-package): ' mk_slug
+    read -p '> Package title (New Package): ' mk_title
+    read -p '> Short package description (Foos and bars.): ' mk_description
+  fi
 
-  sed_delete README.md '10,103d'
+  sed_delete README.md '10,80d'
   sed_insert README.md '10i' 'TODO'
 
   find_replace "s/^  \"version\": \".*\"/  \"version\": \"0.0.0\"/g"
   find_replace "s/TypeScript Module Package Skeleton/${mk_title}/g"
   find_replace "s/Package skeleton for a TypeScript module\./${mk_description}/g"
-  find_replace "s/@seambot/${mk_codeowner}/g"
+  find_replace "s/@seambot/@${mk_codeowner}/g"
   find_replace "s|@seamapi/makenew-tsmodule|${mk_slug}|g"
   find_replace "s|makenew-tsmodule|${mk_repo}|g"
 
