@@ -27,7 +27,6 @@
     "index.d.ts",
     "lib",
     "src",
-    "!test",
     "!**/*.test.ts"
   ],
   "scripts": {
