@@ -4,6 +4,9 @@ name: Make New
 on:
   workflow_dispatch:
     inputs:
+      package:
+        description: Package name (@seamapi/new-package)
+        required: true
       repo:
         description: GitHub repository name (new-repo)
         required: true
@@ -58,7 +61,7 @@ jobs:
           CI: 'true'
           mk_codeowner: ${{ github.actor }}
           mk_repo: ${{ github.event.inputs.repo }}
-          mk_slug: '@seamapi/${{ github.event.inputs.repo }}'
+          mk_slug: ${{ github.event.inputs.package }}
           mk_title: ${{ github.event.inputs.title }}
           mk_description: ${{ github.event.inputs.description }}
       - name: Set origin
