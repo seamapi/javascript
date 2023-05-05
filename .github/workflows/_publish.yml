@@ -12,6 +12,9 @@ on:
         description: The package registry host.
         type: string
         required: true
+      node_auth_token:
+        description: The Node.js auth token.
+        required: true
     secrets:
       registry_token:
         description: The package registry token.
@@ -29,7 +32,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           install_dependencies: 'false'
-          node_auth_token: ${{ secrets.GH_TOKEN }}
+          node_auth_token: ${{ secrets.node_auth_token }}
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:

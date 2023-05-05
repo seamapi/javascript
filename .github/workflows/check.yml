@@ -61,6 +61,8 @@ jobs:
   build:
     name: Build
     uses: ./.github/workflows/_build.yml
+    secrets:
+      node_auth_token: ${{ secrets.GH_TOKEN }}
   install:
     name: Install (Node.js v${{ matrix.node }} on ${{ matrix.os_name }})
     runs-on: ${{ matrix.os }}

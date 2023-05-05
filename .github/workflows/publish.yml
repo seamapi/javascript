@@ -12,6 +12,8 @@ jobs:
   build:
     name: Build
     uses: ./.github/workflows/_build.yml
+    secrets:
+      node_auth_token: ${{ secrets.GH_TOKEN }}
   release:
     name: GitHub Releases
     runs-on: ubuntu-latest
@@ -55,3 +57,4 @@ jobs:
       registry_host: https://npm.pkg.github.com
     secrets:
       registry_token: ${{ secrets.GITHUB_TOKEN }}
+      node_auth_token: ${{ secrets.GH_TOKEN }}
