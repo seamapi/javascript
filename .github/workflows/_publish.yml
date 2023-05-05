@@ -12,12 +12,12 @@ on:
         description: The package registry host.
         type: string
         required: true
-      node_auth_token:
-        description: The Node.js auth token.
-        required: true
     secrets:
       registry_token:
         description: The package registry token.
+        required: true
+      node_auth_token:
+        description: The Node.js auth token.
         required: true
 
 jobs:
