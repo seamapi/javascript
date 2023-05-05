@@ -85,6 +85,8 @@ jobs:
     timeout-minutes: 30
     needs: bootstrap
     steps:
+      - name: Wait for repo to exist
+        run: sleep 10
       - name: Cut version
         run: gh workflow run version.yml --repo $REPO --raw-field version=patch
         env:

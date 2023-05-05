@@ -12,7 +12,7 @@ closeComment: false
 pulls:
   daysUntilStale: 3
   daysUntilClose: 1
-  staleLabel: 'stale'
+  staleLabel: stale
   markComment: >
     This pull request has been automatically marked as stale because it has not had
     recent activity. It will be closed if no further activity occurs.

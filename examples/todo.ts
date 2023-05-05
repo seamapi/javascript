@@ -14,8 +14,8 @@ export const builder: Builder = {
   x: {
     type: 'string',
     default: 'TODO',
-    describe: 'TODO'
-  }
+    describe: 'TODO',
+  },
 }
 
 export const handler: Handler<Options> = async ({ x, logger }) => {

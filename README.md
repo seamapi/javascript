@@ -152,7 +152,7 @@ $ npm install
 
 #### Automatic
 
-New versions are released automatically with [semantic-release].
+New versions are released automatically with [semantic-release]
 as long as commits follow the [Angular Commit Message Conventions].
 
 [Angular Commit Message Conventions]: https://semantic-release.gitbook.io/semantic-release/#commit-message-format
