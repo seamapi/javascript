@@ -27,7 +27,7 @@
           ["^\\u0000"],
           ["^node:"],
           ["^@?\\w"],
-          ["index.js"],
+          ["@seamapi/makenew-tsmodule"],
           ["^lib/"],
           ["^"],
           ["^\\."]
