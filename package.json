@@ -67,7 +67,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "landlubber": "^1.0.0",
-    "prettier": "^2.3.0",
+    "prettier": "^3.0.0",
     "tsc-alias": "^1.8.2",
     "tsx": "^3.12.1",
     "typescript": "^5.0.2"
