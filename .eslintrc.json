@@ -1,19 +1,12 @@
 {
   "root": true,
-  "extends": ["standard-with-typescript", "prettier"],
   "plugins": ["simple-import-sort", "unused-imports"],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "sourceType": "module",
+    "ecmaVersion": "latest"
   },
   "rules": {
-    "no-console": "warn",
-    "@typescript-eslint/consistent-type-imports": [
-      "error",
-      {
-        "fixStyle": "inline-type-imports"
-      }
-    ],
-    "@typescript-eslint/no-unused-vars": "off",
+    "no-console": "error",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "error",
@@ -34,7 +27,7 @@
           ["^\\u0000"],
           ["^node:"],
           ["^@?\\w"],
-          ["index.js"],
+          ["@seamapi/makenew-tsmodule"],
           ["^lib/"],
           ["^"],
           ["^\\."]
@@ -42,5 +35,28 @@
       }
     ],
     "simple-import-sort/exports": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.js", "*.mjs", "*.cjs"],
+      "extends": ["standard", "prettier"]
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["standard-with-typescript", "prettier"],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "@typescript-eslint/no-import-type-side-effects": "error",
+        "@typescript-eslint/consistent-type-imports": [
+          "error",
+          {
+            "fixStyle": "inline-type-imports"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    }
+  ]
 }

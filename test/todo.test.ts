@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import { todo } from 'index.js'
+import { todo } from '@seamapi/makenew-tsmodule'
 
 test('todo: returns argument', (t) => {
   t.is(todo('todo'), 'todo', 'returns input')

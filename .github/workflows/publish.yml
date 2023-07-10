@@ -61,6 +61,6 @@ jobs:
     needs: build
     with:
       artifact_name: ${{ needs.build.outputs.artifact_name }}
-      registry_host: https://npm.pkg.github.com
+      registry_url: https://npm.pkg.github.com
     secrets:
       registry_token: ${{ secrets.GITHUB_TOKEN }}

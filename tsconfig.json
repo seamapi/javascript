@@ -24,7 +24,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
     "paths": {
-      "index.js": ["./src/index.ts"],
+      "@seamapi/makenew-tsmodule": ["./src/index.ts"],
       "lib/*": ["./src/lib/*"]
     }
   },

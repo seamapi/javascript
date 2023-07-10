@@ -8,13 +8,16 @@ on:
         description: The artifact name.
         type: string
         required: true
-      registry_host:
-        description: The package registry host.
+      registry_url:
+        description: The package registry url.
         type: string
         required: true
     secrets:
       registry_token:
         description: The package registry token.
+        required: true
+      node_auth_token:
+        description: The Node.js auth token.
         required: true
 
 jobs:
@@ -38,9 +41,9 @@ jobs:
         id: meta
         run: echo "tgz=$(ls *.tgz | head -n1)" >> $GITHUB_OUTPUT
       - name: Publish
-        uses: rxfork/npm-publish@v1
+        uses: JS-DevTools/npm-publish@v2
         with:
-          access: public
-          target: ${{ steps.meta.outputs.tgz }}
           token: ${{ secrets.registry_token }}
-          registry: ${{ inputs.registry_host }}
+          registry: ${{ inputs.registry_url }}
+          package: ${{ steps.meta.outputs.tgz }}
+          access: public
