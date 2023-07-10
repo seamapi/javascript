@@ -8,8 +8,8 @@ on:
         description: The artifact name.
         type: string
         required: true
-      registry_host:
-        description: The package registry host.
+      registry_url:
+        description: The package registry url.
         type: string
         required: true
     secrets:
@@ -45,6 +45,6 @@ jobs:
         uses: JS-DevTools/npm-publish@v2
         with:
           token: ${{ secrets.registry_token }}
-          registry: ${{ inputs.registry_host }}
+          registry: ${{ inputs.registry_url }}
           package: ${{ steps.meta.outputs.tgz }}
           access: restricted
