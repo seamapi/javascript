@@ -51,7 +51,7 @@ jobs:
       artifact_name: ${{ needs.build.outputs.artifact_name }}
       registry_url: https://registry.npmjs.org
     secrets:
-      registry_token: ${{ secrets.NPM_TOKEN }}
+      node_auth_token: ${{ secrets.NPM_TOKEN }}
   github:
     name: GitHub Packages
     uses: ./.github/workflows/_publish.yml
@@ -63,4 +63,4 @@ jobs:
       artifact_name: ${{ needs.build.outputs.artifact_name }}
       registry_url: https://npm.pkg.github.com
     secrets:
-      registry_token: ${{ secrets.GITHUB_TOKEN }}
+      node_auth_token: ${{ secrets.GITHUB_TOKEN }}
