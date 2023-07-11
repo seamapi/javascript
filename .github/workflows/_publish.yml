@@ -13,7 +13,7 @@ on:
         type: string
         required: true
     secrets:
-      node_auth_token:
+      registry_token:
         description: The Node.js auth token.
         required: true
 
@@ -40,7 +40,7 @@ jobs:
       - name: Publish
         uses: JS-DevTools/npm-publish@v2
         with:
-          token: ${{ secrets.node_auth_token }}
+          token: ${{ secrets.registry_token }}
           registry: ${{ inputs.registry_url }}
           package: ${{ steps.meta.outputs.tgz }}
           access: public
