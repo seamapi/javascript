@@ -44,7 +44,7 @@ jobs:
       - name: Publish
         uses: JS-DevTools/npm-publish@v2
         with:
+          access: restricted
           token: ${{ secrets.registry_token }}
           registry: ${{ inputs.registry_url }}
           package: ${{ steps.meta.outputs.tgz }}
-          access: restricted
