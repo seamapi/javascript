@@ -134,5 +134,5 @@ jobs:
         uses: ./.github/actions/setup
         with:
           node_version: ${{ matrix.node }}
-      - name: Check types
+      - name: Typecheck
         run: npm run typecheck
