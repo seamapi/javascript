@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "@ava/get-port": "^2.0.0",
+    "@seamapi/fake-seam-connect": "^0.13.0",
     "@semantic-release/commit-analyzer": "^10.0.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^10.0.4",

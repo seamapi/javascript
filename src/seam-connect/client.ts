@@ -179,7 +179,20 @@ const makeRequest = async <T>(
   request: AxiosRequestConfig
 ): Promise<SuccessfulAPIResponse<T>> => {
   try {
+    console.log(request)
     const response = await client.request(request)
+
+    // If you have an array of strings in params, it must be joined via ","
+    // If you have an object, that's invalid
+    // for (const paramName in request.params) {
+    //   const paramVal = request.params[param_name]
+
+    //   if (Array.isArray(p) && typeof p[0] === "object") {
+    //     throw new SeamMalformedInputError({
+    //       params: "must be a string or array of strings",
+    //     })
+    //   }
+    // }
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
