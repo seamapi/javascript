@@ -27,10 +27,9 @@ jobs:
           fetch-depth: 0
       - name: Semantic release
         id: release
-        uses: cycjimmy/semantic-release-action@v3
+        uses: cycjimmy/semantic-release-action@v4
         with:
           dry_run: true
-          semantic_version: '^19.0.0'
   release:
     name: Release version
     runs-on: ubuntu-latest
