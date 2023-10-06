@@ -20,6 +20,7 @@
     ],
     "import/extensions": ["error", "ignorePackages"],
     "import/no-duplicates": ["error", { "prefer-inline": true }],
+    "import/no-relative-parent-imports": "error",
     "simple-import-sort/imports": [
       "error",
       {
