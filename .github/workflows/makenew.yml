@@ -42,12 +42,12 @@ jobs:
     needs: repository
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GH_TOKEN }}
       - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v5
+        uses: crazy-max/ghaction-import-gpg@v6
         with:
           git_user_signingkey: true
           git_commit_gpgsign: true
@@ -71,7 +71,7 @@ jobs:
         env:
           ORIGIN: https://github.com/seamapi/${{ github.event.inputs.repo }}.git
       - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: main
           skip_fetch: true

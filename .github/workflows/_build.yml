@@ -8,7 +8,7 @@ on:
         description: The Node.js version.
         type: string
         required: false
-        default: '18'
+        default: '20'
     outputs:
       artifact_name:
         description: The artifact name.
@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
         with:
