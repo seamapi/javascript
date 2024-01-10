@@ -7,8 +7,14 @@
   "types": "index.d.ts",
   "exports": {
     ".": {
-      "import": "./index.js",
-      "types": "./index.d.ts"
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "module": "index.js",
@@ -30,11 +36,15 @@
     "index.d.ts",
     "lib",
     "src",
+    "dist",
     "!**/*.test.ts"
   ],
   "scripts": {
-    "build": "npm run build:ts",
+    "build": "npm run build:entrypoints",
+    "prebuild": "tsx src/index.ts",
     "postbuild": "node ./index.js",
+    "build:entrypoints": "npm run build:ts",
+    "postbuild:entrypoints": "tsup",
     "build:ts": "tsc --project tsconfig.build.json",
     "prebuild:ts": "del 'index.*' lib",
     "postbuild:ts": "tsc-alias --project tsconfig.build.json",
@@ -71,6 +81,7 @@
     "landlubber": "^1.0.0",
     "prettier": "^3.0.0",
     "tsc-alias": "^1.8.2",
+    "tsup": "^8.0.1",
     "tsx": "^4.6.2",
     "typescript": "^5.1.0"
   }
