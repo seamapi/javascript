@@ -7,7 +7,18 @@ JavaScript SDK for the Seam API written in TypeScript.
 
 ## Description
 
-TODO
+[Seam] makes it easy to integrate IoT devices with your applications.
+This is an official SDK for the Seam API.
+Please refer to the official [Seam Docs] to get started.
+
+The SDK is fully tree-shakeable
+and optimized for use in both client and server applications.
+
+The package does not contain any code, it re-exports from a core set of Seam modules:
+
+- [`@seamapi/types`](https://github.com/seamapi/types): TypeScript types for the Seam API.
+- [`@seamapi/http`](https://github.com/seamapi/javascript-http): JavaScript HTTP client for the Seam API written in TypeScript.
+- [`@seamapi/webhook`](https://github.com/seamapi/javascript-http): Webhook SDK for the Seam API written in TypeScript.
 
 ## Installation
 
@@ -18,6 +29,27 @@ $ npm install seam
 ```
 
 [npm]: https://www.npmjs.com/
+
+### Usage
+
+#### Unlock a door
+
+```ts
+import Seam from 'seam'
+
+const seam = new Seam()
+const lock = await seam.locks.get({ name: 'Front Door' })
+await seam.locks.unlockDoor({ device_id: lock.device_id })
+```
+
+#### Parse and validate a webhook
+
+```ts
+import { SeamWebhook } from 'seam'
+
+const webhook = new SeamWebhook('webhook-secret')
+const data = webhook.verify(payload, headers)
+```
 
 ## Development and Testing
 
