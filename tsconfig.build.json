@@ -9,5 +9,5 @@
   },
   "files": ["src/index.ts"],
   "include": ["src/**/*"],
-  "exclude": ["**/*.test.ts"]
+  "exclude": ["**/*.test.ts", "tsup.config.ts"]
 }
