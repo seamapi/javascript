@@ -142,7 +142,7 @@ The following repository secrets must be set on [GitHub Actions]:
 
 - `NPM_TOKEN`: npm token for installing and publishing packages.
 - `GH_TOKEN`: A personal access token for the bot user with
-  `packages:write` and `contents:write` permission.
+  and `contents:write` permission.
 - `GIT_USER_NAME`: The GitHub bot user's real name.
 - `GIT_USER_EMAIL`: The GitHub bot user's email.
 - `GPG_PRIVATE_KEY`: The GitHub bot user's [GPG private key].

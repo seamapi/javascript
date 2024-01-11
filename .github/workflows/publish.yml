@@ -52,15 +52,3 @@ jobs:
       registry_url: https://registry.npmjs.org
     secrets:
       registry_token: ${{ secrets.NPM_TOKEN }}
-  github:
-    name: GitHub Packages
-    uses: ./.github/workflows/_publish.yml
-    permissions:
-      contents: read
-      packages: write
-    needs: build
-    with:
-      artifact_name: ${{ needs.build.outputs.artifact_name }}
-      registry_url: https://npm.pkg.github.com
-    secrets:
-      registry_token: ${{ secrets.GITHUB_TOKEN }}
