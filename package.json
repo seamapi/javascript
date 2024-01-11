@@ -84,5 +84,11 @@
     "tsup": "^8.0.1",
     "tsx": "^4.6.2",
     "typescript": "^5.1.0"
+  },
+  "dependencies": {
+    "@seamapi/http": "^0.14.0",
+    "@seamapi/types": "^1.81.0",
+    "@seamapi/webhook": "^0.1.0",
+    "seam-cli": "^0.0.28"
   }
 }
