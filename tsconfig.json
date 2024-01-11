@@ -24,8 +24,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
     "paths": {
-      "seam": ["./src/index.ts"],
-      "lib/*": ["./src/lib/*"]
+      "seam": ["./src/index.ts"]
     }
   },
   "files": ["src/index.ts"],
