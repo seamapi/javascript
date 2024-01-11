@@ -5,6 +5,10 @@
 
 JavaScript SDK for the Seam API written in TypeScript.
 
+_This is a preview of the next major version of the Seam SDK.
+This SDK is available for early preview.
+It will eventually replace the [seamapi](https://github.com/seamapi/javascript/) package._
+
 ## Description
 
 [Seam] makes it easy to integrate IoT devices with your applications.
@@ -16,9 +20,15 @@ and optimized for use in both client and server applications.
 
 The package does not contain any code, it re-exports from a core set of Seam modules:
 
-- [`@seamapi/types`](https://github.com/seamapi/types): TypeScript types for the Seam API.
-- [`@seamapi/http`](https://github.com/seamapi/javascript-http): JavaScript HTTP client for the Seam API written in TypeScript.
-- [`@seamapi/webhook`](https://github.com/seamapi/javascript-http): Webhook SDK for the Seam API written in TypeScript.
+- [@seamapi/types]: TypeScript types for the Seam API.
+- [@seamapi/http]: JavaScript HTTP client for the Seam API written in TypeScript.
+- [@seamapi/webhook]: Webhook SDK for the Seam API written in TypeScript.
+
+[Seam]: https://www.seam.co/
+[Seam Docs]: https://docs.seam.co/latest/
+[@seamapi/types]: https://github.com/seamapi/types
+[@seamapi/http]: https://github.com/seamapi/javascript-http
+[@seamapi/webhook]: https://github.com/seamapi/javascript-webhook
 
 ## Installation
 
