@@ -28,7 +28,6 @@ $ git clone https://github.com/seamapi/javascript-next.git
 $ cd javascript-next
 $ nvm install
 $ npm install
-$ npm run test:watch
 ```
 
 Primary development tasks are defined under `scripts` in `package.json`
