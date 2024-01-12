@@ -1,0 +1,14 @@
+{
+  "semanticCommits": true,
+  "semanticCommitType": "ci",
+  "commitMessageLowerCase": "never",
+  "autoApprove": true,
+  "automerge": false,
+  "packageRules": [
+    {
+      "matchPackageNames": ["seamapi-types"],
+      "matchPackagePatterns": ["^@seamapi/"],
+      "groupName": "seam"
+    }
+  ]
+}
