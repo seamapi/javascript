@@ -8,7 +8,8 @@ updates:
     allow:
       - dependency-type: production
     groups:
-      - dependency-type: production
-      - update-types:
+      seam:
+        dependency-type: production
+        update-types:
           - patch
           - minor
