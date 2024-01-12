@@ -1,0 +1,18 @@
+---
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: feat
+      include: scope
+    allow:
+      - dependency-type: production
+    groups:
+      seam:
+        dependency-type: production
+        update-types:
+          - patch
+          - minor
