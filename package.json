@@ -59,6 +59,12 @@
     "node": ">=18.12.0",
     "npm": ">= 9.0.0"
   },
+  "dependencies": {
+    "@seamapi/http": "0.14.0",
+    "@seamapi/types": "1.81.0",
+    "@seamapi/webhook": "0.1.0",
+    "seamapi-types": "1.32.0"
+  },
   "devDependencies": {
     "@types/node": "^20.8.10",
     "del-cli": "^5.0.0",
@@ -73,11 +79,5 @@
     "tsup": "^8.0.1",
     "tsx": "^4.6.2",
     "typescript": "^5.1.0"
-  },
-  "dependencies": {
-    "@seamapi/http": "^0.14.0",
-    "@seamapi/types": "^1.81.0",
-    "@seamapi/webhook": "^0.1.0",
-    "seamapi-types": "^1.32.0"
   }
 }
