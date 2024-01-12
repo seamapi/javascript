@@ -5,6 +5,7 @@ on:
   push:
     branches-ignore:
       - main
+      - 'dependabot/*'
   workflow_dispatch: {}
 
 jobs:
