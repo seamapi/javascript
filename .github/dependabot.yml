@@ -10,5 +10,5 @@ updates:
     groups:
       - dependency-type: production
       - update-types:
-        - patch
-        - minor
+          - patch
+          - minor
