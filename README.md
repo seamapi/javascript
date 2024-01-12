@@ -24,7 +24,7 @@ Instead, it re-exports from a core set of Seam modules.
 _While this SDK is still in preview,
 please refer to the individual README files in these repositories for
 additional usage documentation not yet available in the primary Seam documentation.
-See [this issue for a draft migration guide](https://github.com/seamapi/javascript-next/issues/1) from the seamapi package_
+See [this issue for a draft migration guide](https://github.com/seamapi/javascript-next/issues/1) from the seamapi package._
 
 - [@seamapi/http]: JavaScript HTTP client for the Seam API written in TypeScript.
 - [@seamapi/webhook]: Webhook SDK for the Seam API written in TypeScript.
