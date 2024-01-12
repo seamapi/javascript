@@ -5,10 +5,10 @@ updates:
     directory: '/'
     schedule:
       interval: weekly
-  allow:
-    - dependency-type: production
-  groups:
-    dependency-type: production
-    update-types:
-      - patch
-      - minor
+    allow:
+      - dependency-type: production
+    groups:
+      dependency-type: production
+      update-types:
+        - patch
+        - minor
