@@ -63,7 +63,7 @@
     "@seamapi/http": "0.17.1",
     "@seamapi/types": "1.108.1",
     "@seamapi/webhook": "0.1.0",
-    "seamapi-types": "1.33.0"
+    "seamapi-types": "1.34.2"
   },
   "devDependencies": {
     "@types/node": "^20.8.10",
