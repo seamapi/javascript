@@ -1,6 +1,6 @@
 {
   "name": "seam",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "description": "JavaScript SDK for the Seam API written in TypeScript.",
   "type": "module",
   "main": "index.js",
