@@ -51,7 +51,7 @@ $ npm install seam
 #### Unlock a door
 
 ```ts
-import Seam from 'seam'
+import { Seam } from 'seam'
 
 const seam = new Seam()
 const lock = await seam.locks.get({ name: 'Front Door' })
