@@ -3,6 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "composite": false,
+    "declaration": true,
     "noEmit": false,
     "noEmitOnError": true,
     "rootDir": "./src",
