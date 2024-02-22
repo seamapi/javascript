@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "@seamapi/http": "0.18.1",
-    "@seamapi/types": "1.115.0",
+    "@seamapi/types": "1.117.0",
     "@seamapi/webhook": "0.1.1",
     "seamapi-types": "1.36.0"
   },
