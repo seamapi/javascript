@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: semantic
-    if: ${{ needs.semantic.outputs.new_release_published == 'true' }}
+    if: needs.semantic.outputs.new_release_published == 'true' && steps.release.outputs.new_release_version != '1.0.0'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
