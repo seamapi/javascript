@@ -1,6 +1,6 @@
 {
   "name": "seam",
-  "version": "0.22.1",
+  "version": "0.26.0",
   "description": "JavaScript SDK for the Seam API written in TypeScript.",
   "type": "module",
   "main": "index.js",
@@ -61,9 +61,9 @@
   },
   "dependencies": {
     "@seamapi/http": "0.18.1",
-    "@seamapi/types": "1.113.2",
+    "@seamapi/types": "1.120.0",
     "@seamapi/webhook": "0.1.1",
-    "seamapi-types": "1.36.0"
+    "seamapi-types": "1.37.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.10",
