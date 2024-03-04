@@ -60,10 +60,10 @@
     "npm": ">= 9.0.0"
   },
   "dependencies": {
-    "@seamapi/http": "0.19.0",
-    "@seamapi/types": "1.123.1",
+    "@seamapi/http": "0.20.0",
+    "@seamapi/types": "1.124.0",
     "@seamapi/webhook": "0.1.1",
-    "seamapi-types": "1.39.0"
+    "seamapi-types": "1.41.1"
   },
   "devDependencies": {
     "@types/node": "^20.8.10",
