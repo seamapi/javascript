@@ -26,7 +26,7 @@ jobs:
       - name: Create repository
         run: |
           gh extension install mislav/gh-repo-collab
-          gh repo create --internal --disable-wiki --description "$DESCRIPTION" $REPO
+          gh repo create --disable-wiki --description "$DESCRIPTION" $REPO
           gh repo edit $REPO --delete-branch-on-merge
           gh repo edit $REPO --enable-projects=false
           gh repo-collab add $REPO $CODEOWNER --permission admin
