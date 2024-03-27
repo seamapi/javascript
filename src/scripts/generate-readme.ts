@@ -41,52 +41,66 @@ const readUsageSection = (readmePath: string): string => {
   return usage
 }
 
-const webhookReadme = getUsageSection(
-  './node_modules/@seamapi/webhook/README.md',
-).replace('@seamapi/webhook', 'seam')
-const httpReadme = getUsageSection(
-  './node_modules/@seamapi/http/README.md',
-).replace('@seamapi/http', 'seam')
+void (async () => {
+  const webhookReadme = getUsageSection(
+    './node_modules/@seamapi/webhook/README.md',
+  ).replace('@seamapi/webhook', 'seam')
+  const httpReadme = getUsageSection(
+    './node_modules/@seamapi/http/README.md',
+  ).replace('@seamapi/http', 'seam')
 
-const typesReadme = getUsageSection('./node_modules/@seamapi/types/README.md', {
-  isNullable: true,
-})?.replace('@seamapi/types', 'seam')
+  const typesReadme = getUsageSection(
+    './node_modules/@seamapi/types/README.md',
+    {
+      isNullable: true,
+    },
+  )?.replace('@seamapi/types', 'seam')
 
-const projectReadme = fs.readFileSync('./README.md', {
-  encoding: 'utf-8',
-})
+  const projectReadme = fs.readFileSync('./README.md', {
+    encoding: 'utf-8',
+  })
 
-const usageRegex = /### Usage\s*([\s\S]*?(?=\n## Development))/
+  const usageRegex = /### Usage\s*([\s\S]*?(?=\n## Development))/
 
-const matches = usageRegex.exec(projectReadme)
+  const matches = usageRegex.exec(projectReadme)
 
-if (matches == null || matches.length !== 2) {
-  throw new Error('Invalid README.md format')
-}
+  if (matches == null || matches.length !== 2) {
+    throw new Error('Invalid README.md format')
+  }
 
-const currentUsage = matches[1]
+  const currentUsage = matches[1]
 
-let injected = `### Usage
+  if (
+    currentUsage != null &&
+    currentUsage.includes(webhookReadme) &&
+    currentUsage.includes(httpReadme) &&
+    currentUsage.includes(typesReadme ?? '')
+  ) {
+    return
+  }
 
-${currentUsage}
-#### Receiving Webhooks
+  let injected = `### Usage
 
-${webhookReadme}
+  ${currentUsage}
+  #### Receiving Webhooks
 
-#### Using HTTP client
+  ${webhookReadme}
 
-${httpReadme}
-`
+  #### Using HTTP client
 
-if (typesReadme != null) {
-  injected += `
+  ${httpReadme}
+  `
 
-#### Types
+  if (typesReadme != null) {
+    injected += `
 
-${typesReadme}
-`
-}
+  #### Types
 
-const result = projectReadme.replace(usageRegex, injected)
+  ${typesReadme}
+  `
+  }
 
-fs.writeFileSync('./README.md', result)
+  const result = projectReadme.replace(usageRegex, injected)
+
+  fs.writeFileSync('./README.md', result)
+})()
