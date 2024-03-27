@@ -10,6 +10,9 @@ updates:
       include: scope
     allow:
       - dependency-type: production
+    ignore:
+      - update-types:
+        - major
     groups:
       seam:
         dependency-type: production
