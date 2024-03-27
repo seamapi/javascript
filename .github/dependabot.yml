@@ -11,8 +11,9 @@ updates:
     allow:
       - dependency-type: production
     ignore:
-      - update-types:
-        - major
+      - dependency-name: '*'
+        update-types:
+          - 'version-update:semver-major'
     groups:
       seam:
         dependency-type: production
