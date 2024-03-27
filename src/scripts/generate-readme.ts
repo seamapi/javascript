@@ -81,23 +81,23 @@ void (async () => {
 
   let injected = `### Usage
 
-  ${currentUsage}
-  #### Receiving Webhooks
+${currentUsage}
+#### Receiving Webhooks
 
-  ${webhookReadme}
+${webhookReadme}
 
-  #### Using HTTP client
+#### Using HTTP client
 
-  ${httpReadme}
-  `
+${httpReadme}
+`
 
   if (typesReadme != null) {
     injected += `
 
-  #### Types
+#### Types
 
-  ${typesReadme}
-  `
+${typesReadme}
+`
   }
 
   const result = projectReadme.replace(usageRegex, injected)
