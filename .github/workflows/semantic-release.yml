@@ -47,4 +47,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           VERSION: ${{ needs.semantic.outputs.new_release_version }}
           BRANCH: ${{ github.ref_name }}
-          
