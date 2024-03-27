@@ -198,6 +198,56 @@ const seam = new SeamHttp('your-api-key')
 const devices = await seam.devices.list()
 ```
 
+#### Receiving Webhooks
+
+First, create a webhook using the Seam API or Seam Console
+and obtain a Seam webhook secret.
+
+_This example is for [Express], see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how)._
+
+```js
+import { SeamWebhook } from 'seam'
+import express from 'express'
+import bodyParser from 'body-parser'
+
+import { storeEvent } from './store-event.js'
+
+const app = express()
+
+const webhook = new SeamWebhook(process.env.SEAM_WEBHOOK_SECRET)
+
+app.post(
+  '/webhook',
+  bodyParser.raw({ type: 'application/json' }),
+  (req, res) => {
+    let data
+    try {
+      data = webhook.verify(payload, headers)
+    } catch {
+      return res.status(400).send()
+    }
+
+    storeEvent(data, (err) => {
+      if (err != null) {
+        return res.status(500).send()
+      }
+      res.status(204).send()
+    })
+  },
+)
+```
+
+[Express]: https://expressjs.com/
+
+#### Using HTTP client
+
+```ts
+import { SeamHttp } from 'seam/connect'
+
+const seam = new SeamHttp('your-api-key')
+const devices = await seam.devices.list()
+```
+
 #### Unlock a door
 
 ```ts
