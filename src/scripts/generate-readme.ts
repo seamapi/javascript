@@ -56,18 +56,37 @@ const projectReadme = fs.readFileSync('./README.md', {
   encoding: 'utf-8',
 })
 
-const result = projectReadme.replace(
-  '### Usage\n',
-  `### Usage
+const usageRegex = /### Usage\s*([\s\S]*?(?=\n## Development))/
 
+const matches = usageRegex.exec(projectReadme)
+
+if (matches == null || matches.length !== 2) {
+  throw new Error('Invalid README.md format')
+}
+
+const currentUsage = matches[1]
+
+let injected = `### Usage
+
+${currentUsage}
 #### Receiving Webhooks
 
 ${webhookReadme}
 
 #### Using HTTP client
 
-${httpReadme}${typesReadme != null ? `\n\n#### Types\n\n${typesReadme}` : ''}
-`,
-)
+${httpReadme}
+`
+
+if (typesReadme != null) {
+  injected += `
+
+#### Types
+
+${typesReadme}
+`
+}
+
+const result = projectReadme.replace(usageRegex, injected)
 
 fs.writeFileSync('./README.md', result)
