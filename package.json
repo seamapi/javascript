@@ -52,9 +52,9 @@
     "lint": "eslint --ignore-path .gitignore .",
     "prelint": "prettier --check --ignore-path .gitignore .",
     "postversion": "git push --follow-tags",
+    "generate:readme": "tsx ./scripts/generate-readme.ts",
     "format": "eslint --ignore-path .gitignore --fix .",
-    "preformat": "prettier --write --ignore-path .gitignore .",
-    "generate:readme": "tsx ./scripts/generate-readme.ts"
+    "preformat": "prettier --write --ignore-path .gitignore ."
   },
   "engines": {
     "node": ">=18.12.0",
