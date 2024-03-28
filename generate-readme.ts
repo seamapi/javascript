@@ -51,14 +51,19 @@ async function writeReadmeUsage(content: string): Promise<void> {
     .replaceAll('SeamHttp', 'Seam')
     .replaceAll('seam/connect', 'seam')
 
-  const currentUsage = matches[1]
-  if (currentUsage.includes(updatedContent)) {
+  const currentUsageSection = matches[1]
+
+  if (
+    currentUsageSection
+      .replaceAll(/\s/g, '')
+      .includes(updatedContent.replaceAll(/\s/g, '')) // Remove all whitespace to ignore formatting changes
+  ) {
     return
   }
 
   const injected = `### Usage
 
-${currentUsage}
+${currentUsageSection}
 ${updatedContent}
 `
 
