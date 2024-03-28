@@ -73,7 +73,7 @@ and obtain a Seam webhook secret.
 _This example is for [Express], see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how)._
 
 ```js
-import { SeamWebhook } from '@seamapi/webhook'
+import { SeamWebhook } from 'seam'
 import express from 'express'
 import bodyParser from 'body-parser'
 
@@ -106,9 +106,9 @@ app.post(
 
 [Express]: https://expressjs.com/
 ```ts
-import { SeamHttp } from '@seamapi/http/connect'
+import { Seam } from 'seam'
 
-const seam = new SeamHttp('your-api-key')
+const seam = new Seam('your-api-key')
 const devices = await seam.devices.list()
 ```
 
@@ -116,11 +116,11 @@ const devices = await seam.devices.list()
 
 The SDK supports several authentication mechanisms.
 Authentication may be configured by passing the corresponding
-options directly to the `SeamHttp` constructor,
+options directly to the `Seam` constructor,
 or with the more ergonomic static factory methods.
 
 > Publishable Key authentication is not supported by the constructor
-> and must be configured using `SeamHttp.fromPublishableKey`.
+> and must be configured using `Seam.fromPublishableKey`.
 
 #### API Key
 
@@ -129,16 +129,16 @@ Obtain one from the Seam Console.
 
 ```ts
 // Set the `SEAM_API_KEY` environment variable
-const seam = new SeamHttp()
+const seam = new Seam()
 
 // Pass as the first argument to the constructor
-const seam = new SeamHttp('your-api-key')
+const seam = new Seam('your-api-key')
 
 // Pass as an option the constructor
-const seam = new SeamHttp({ apiKey: 'your-api-key' })
+const seam = new Seam({ apiKey: 'your-api-key' })
 
 // Use the factory method
-const seam = SeamHttp.fromApiKey('your-api-key')
+const seam = Seam.fromApiKey('your-api-key')
 ```
 
 #### Client Session Token
@@ -147,16 +147,16 @@ A Client Session Token is scoped to a client session and should only be used on 
 
 ```ts
 // Pass as an option the constructor
-const seam = new SeamHttp({ clientSessionToken: 'some-client-session-token' })
+const seam = new Seam({ clientSessionToken: 'some-client-session-token' })
 
 // Use the factory method
-const seam = SeamHttp.fromClientSessionToken('some-client-session-token')
+const seam = Seam.fromClientSessionToken('some-client-session-token')
 ```
 
 The client session token may be updated using
 
 ```
-const seam = SeamHttp.fromClientSessionToken('some-client-session-token')
+const seam = Seam.fromClientSessionToken('some-client-session-token')
 
 await seam.updateClientSessionToken('some-new-client-session-token')
 ```
@@ -169,7 +169,7 @@ Obtain one from the Seam Console.
 Use the async factory method to return a client authenticated with a client session token:
 
 ```ts
-const seam = await SeamHttp.fromPublishableKey(
+const seam = await Seam.fromPublishableKey(
   'your-publishable-key',
   'some-user-identifier-key',
 )
@@ -188,13 +188,13 @@ and all requests will be scoped to that workspace.
 ```ts
 // Pass as an option the constructor
 
-const seam = new SeamHttp({
+const seam = new Seam({
   personalAccessToken: 'your-personal-access-token',
   workspaceId: 'your-workspace-id',
 })
 
 // Use the factory method
-const seam = SeamHttp.fromPersonalAccessToken(
+const seam = Seam.fromPersonalAccessToken(
   'some-console-session-token',
   'your-workspace-id',
 )
@@ -209,13 +209,13 @@ and all requests will be scoped to that workspace.
 
 ```ts
 // Pass as an option the constructor
-const seam = new SeamHttp({
+const seam = new Seam({
   consoleSessionToken: 'some-console-session-token',
   workspaceId: 'your-workspace-id',
 })
 
 // Use the factory method
-const seam = SeamHttp.fromConsoleSessionToken(
+const seam = Seam.fromConsoleSessionToken(
   'some-console-session-token',
   'your-workspace-id',
 )
@@ -243,7 +243,7 @@ await seam.locks.unlockDoor(
 or set the default option for the client:
 
 ```ts
-const seam = new SeamHttp({
+const seam = new Seam({
   apiKey: 'your-api-key',
   waitForActionAttempt: true,
 })
@@ -274,12 +274,12 @@ Using the `waitForActionAttempt` option:
 
 ```ts
 import {
-  SeamHttp,
+  Seam,
   isSeamActionAttemptFailedError,
   isSeamActionAttemptTimeoutError,
-} from '@seamapi/http/connect'
+} from 'seam'
 
-const seam = new SeamHttp('your-api-key')
+const seam = new Seam('your-api-key')
 
 const [lock] = await seam.locks.list()
 
@@ -316,7 +316,7 @@ try {
 ### Interacting with Multiple Workspaces
 
 Some Seam API endpoints interact with multiple workspaces.
-The `SeamHttpMultiWorkspace` client is not bound to a specific workspace
+The `SeamMultiWorkspace` client is not bound to a specific workspace
 and may use those endpoints with an appropriate authentication method.
 
 #### Personal Access Token
@@ -326,12 +326,12 @@ Obtain one from the Seam Console.
 
 ```ts
 // Pass as an option the constructor
-const seam = new SeamHttpMultiWorkspace({
+const seam = new SeamMultiWorkspace({
   personalAccessToken: 'your-personal-access-token',
 })
 
 // Use the factory method
-const seam = SeamHttpMultiWorkspace.fromPersonalAccessToken(
+const seam = SeamMultiWorkspace.fromPersonalAccessToken(
   'some-console-session-token',
 )
 
@@ -346,12 +346,12 @@ This authentication method is only used by internal Seam applications.
 
 ```ts
 // Pass as an option the constructor
-const seam = new SeamHttpMultiWorkspace({
+const seam = new SeamMultiWorkspace({
   consoleSessionToken: 'some-console-session-token',
 })
 
 // Use the factory method
-const seam = SeamHttpMultiWorkspace.fromConsoleSessionToken(
+const seam = SeamMultiWorkspace.fromConsoleSessionToken(
   'some-console-session-token',
 )
 
@@ -367,7 +367,7 @@ In addition the various authentication options,
 the constructor takes some advanced options that affect behavior.
 
 ```ts
-const seam = new SeamHttp({
+const seam = new Seam({
   apiKey: 'your-api-key',
   endpoint: 'https://example.com',
   axiosOptions: {},
@@ -379,7 +379,7 @@ When using the static factory methods,
 these options may be passed in as the last argument.
 
 ```ts
-const seam = SeamHttp.fromApiKey('some-api-key', {
+const seam = Seam.fromApiKey('some-api-key', {
   endpoint: 'https://example.com',
   axiosOptions: {},
   axiosRetryOptions: {},
@@ -408,9 +408,9 @@ Options are deep merged with the default options.
 The Axios client is exposed and may be used or configured directly:
 
 ```ts
-import { SeamHttp, DevicesListResponse } from '@seamapi/http/connect'
+import { Seam, DevicesListResponse } from 'seam'
 
-const seam = new SeamHttp()
+const seam = new Seam()
 
 seam.client.interceptors.response.use((response) => {
   console.log(response)
@@ -422,7 +422,7 @@ const devices = await seam.client.get<DevicesListResponse>('/devices/list')
 
 #### Overriding the Client
 
-An Axios compatible client may be provided to create a `SeamHttp` instance.
+An Axios compatible client may be provided to create a `Seam` instance.
 This API is used internally and is not directly supported.
 
 ## Development and Testing
