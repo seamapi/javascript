@@ -46,8 +46,10 @@ async function writeReadmeUsage(content: string): Promise<void> {
   }
 
   const updatedContent = content
-    .replace('@seamapi/webhook', 'seam')
-    .replace('@seamapi/http', 'seam')
+    .replaceAll('@seamapi/webhook', 'seam')
+    .replaceAll('@seamapi/http', 'seam')
+    .replaceAll('SeamHttp', 'Seam')
+    .replaceAll('seam/connect', 'seam')
 
   const currentUsage = matches[1]
   if (currentUsage.includes(updatedContent)) {
