@@ -54,7 +54,7 @@
     "postversion": "git push --follow-tags",
     "format": "eslint --ignore-path .gitignore --fix .",
     "preformat": "prettier --write --ignore-path .gitignore .",
-    "generate:readme": "tsx ./src/scripts/generate-readme.ts"
+    "generate:readme": "tsx ./scripts/generate-readme.ts"
   },
   "engines": {
     "node": ">=18.12.0",
