@@ -1,30 +1,13 @@
-import fs from 'node:fs'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
-interface GetUsageSectionOptions<TNullable = false> {
-  isNullable?: TNullable
-}
-
-const getUsageSection = <TNullable = false>(
-  readmePath: string,
-  options: GetUsageSectionOptions<TNullable> = {},
-): TNullable extends true ? string | null : string => {
-  const { isNullable = false } = options
-
-  try {
-    return readUsageSection(readmePath)
-  } catch (error) {
-    if (isNullable === true) {
-      return null as any
-    }
-
-    throw error
-  }
-}
-
-const readUsageSection = (readmePath: string): string => {
-  const data = fs.readFileSync(readmePath, {
-    encoding: 'utf-8',
-  })
+const readUsageSection = async (modulePath: string): Promise<string> => {
+  const data = await fs.readFile(
+    path.join('node_modules', modulePath, 'README.md'),
+    {
+      encoding: 'utf-8',
+    },
+  )
 
   const regex = /\s\S*#* Usage\s*([^#]*)/
   const matches = regex.exec(data)
@@ -41,22 +24,16 @@ const readUsageSection = (readmePath: string): string => {
   return usage
 }
 
-void (async () => {
-  const webhookReadme = getUsageSection(
-    './node_modules/@seamapi/webhook/README.md',
-  ).replace('@seamapi/webhook', 'seam')
-  const httpReadme = getUsageSection(
-    './node_modules/@seamapi/http/README.md',
-  ).replace('@seamapi/http', 'seam')
+// just leave out @seamapi/types and assume missing usage section is always an error
+// since we will just add it here if we want to include it later.
+// Should greatly simplify all the null conditionals
+const submodules = [
+  path.join('@seamapi', 'webhook'),
+  path.join('@seamapi', 'http'),
+]
 
-  const typesReadme = getUsageSection(
-    './node_modules/@seamapi/types/README.md',
-    {
-      isNullable: true,
-    },
-  )?.replace('@seamapi/types', 'seam')
-
-  const projectReadme = fs.readFileSync('./README.md', {
+const writeReadmeUsage = async (content: string): Promise<void> => {
+  const projectReadme = await fs.readFile('./README.md', {
     encoding: 'utf-8',
   })
 
@@ -64,43 +41,29 @@ void (async () => {
 
   const matches = usageRegex.exec(projectReadme)
 
-  if (matches == null || matches.length !== 2) {
+  if (matches == null || matches.length !== 2 || matches[1] == null) {
     throw new Error('Invalid README.md format')
   }
 
-  const currentUsage = matches[1]
+  const updatedContent = content
+    .replace('@seamapi/webhook', 'seam')
+    .replace('@seamapi/http', 'seam')
 
-  if (
-    currentUsage != null &&
-    currentUsage.includes(webhookReadme) &&
-    currentUsage.includes(httpReadme) &&
-    currentUsage.includes(typesReadme ?? '')
-  ) {
+  const currentUsage = matches[1]
+  if (currentUsage.includes(updatedContent)) {
     return
   }
 
-  let injected = `### Usage
+  const injected = `### Usage
 
 ${currentUsage}
-#### Receiving Webhooks
-
-${webhookReadme}
-
-#### Using HTTP client
-
-${httpReadme}
+${content}
 `
-
-  if (typesReadme != null) {
-    injected += `
-
-#### Types
-
-${typesReadme}
-`
-  }
 
   const result = projectReadme.replace(usageRegex, injected)
 
-  fs.writeFileSync('./README.md', result)
-})()
+  await fs.writeFile('./README.md', result)
+}
+
+const sections = await Promise.all(submodules.map(readUsageSection))
+await writeReadmeUsage(sections.join('\n'))
