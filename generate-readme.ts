@@ -60,7 +60,7 @@ async function writeReadmeUsage(content: string): Promise<void> {
     return
   }
 
-  const injected = `### Usage
+  const injected = `## Usage
 
 ${updatedContent}
 `
