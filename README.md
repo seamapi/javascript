@@ -86,6 +86,7 @@ app.post(
 ```
 
 [Express]: https://expressjs.com/
+
 ### Examples
 
 _These examples assume `SEAM_API_KEY` is set in your environment._
