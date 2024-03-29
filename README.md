@@ -57,7 +57,7 @@ Instead, it re-exports from a core set of Seam modules:
     - [Using the Axios Client](#using-the-axios-client)
     - [Overriding the Client](#overriding-the-client)
     - [Inspecting the Request](#inspecting-the-request)
-  - [Webhooks](#webhooks)
+  - [Receiving Webhooks](#receiving-webhooks)
 - [Development and Testing](#development-and-testing)
   - [Quickstart](#quickstart)
   - [Source code](#source-code)
@@ -434,8 +434,7 @@ console.log(`${request.method} ${request.url}`, JSON.stringify(request.body))
 
 const devices = await request.execute()
 ```
-
-### Webhooks
+### Receiving Webhooks
 
 First, create a webhook using the Seam API or Seam Console
 and obtain a Seam webhook secret.
