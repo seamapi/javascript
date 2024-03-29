@@ -14,7 +14,7 @@ const submodules: Submodule[] = [
     readmePath: path.join('node_modules', '@seamapi', 'http', readmeName),
   },
   {
-    heading: 'Webhooks',
+    heading: 'Receiving Webhooks',
     readmePath: path.join('node_modules', '@seamapi', 'webhook', readmeName),
   },
 ]
