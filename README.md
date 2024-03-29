@@ -434,6 +434,7 @@ console.log(`${request.method} ${request.url}`, JSON.stringify(request.body))
 
 const devices = await request.execute()
 ```
+
 ### Receiving Webhooks
 
 First, create a webhook using the Seam API or Seam Console
