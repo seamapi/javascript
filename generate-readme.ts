@@ -23,13 +23,11 @@ async function readUsageSection(modulePath: string): Promise<string> {
     throw new Error('Missing [## Usage] section')
   }
 
-  const usage = matches[1]?.replace(/^\s+|\s+$/g, '') // trim any trailing whitespace
-
   if (usage == null) {
     throw new Error('Invalid [## Usage] format')
   }
 
-  return usage
+  return usage.trimStart().trimEnd()
 }
 
 async function writeReadmeUsage(content: string): Promise<void> {
