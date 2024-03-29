@@ -48,6 +48,9 @@ $ npm install seam
 
 ## Usage
 
+<!-- toc -->
+<!-- tocstop -->
+
 First, create a webhook using the Seam API or Seam Console
 and obtain a Seam webhook secret.
 

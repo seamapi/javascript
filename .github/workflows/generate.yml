@@ -33,8 +33,8 @@ jobs:
           install_dependencies: 'false'
       - name: Normalize package-lock.json
         run: npm install
-      - name: Generate README.md usage
-        run: npm run generate:readme
+      - name: Generate code
+        run: npm run generate
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
