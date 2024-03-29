@@ -23,6 +23,7 @@ async function readUsageSection(modulePath: string): Promise<string> {
     throw new Error('Missing [## Usage] section')
   }
 
+  const usage = matches[1]
   if (usage == null) {
     throw new Error('Invalid [## Usage] format')
   }
