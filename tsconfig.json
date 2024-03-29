@@ -28,5 +28,10 @@
     }
   },
   "files": ["src/index.ts"],
-  "include": ["src/**/*", "examples/**/*", "tsup.config.ts", "generate-readme.ts"]
+  "include": [
+    "src/**/*",
+    "examples/**/*",
+    "tsup.config.ts",
+    "generate-readme.ts"
+  ]
 }
