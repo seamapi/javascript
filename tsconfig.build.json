@@ -11,5 +11,5 @@
   },
   "files": ["src/index.ts"],
   "include": ["src/**/*"],
-  "exclude": ["examples/**/*", "tsup.config.ts"]
+  "exclude": ["examples/**/*", "tsup.config.ts", "generate-readme.ts"]
 }

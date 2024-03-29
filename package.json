@@ -52,6 +52,7 @@
     "lint": "eslint --ignore-path .gitignore .",
     "prelint": "prettier --check --ignore-path .gitignore .",
     "postversion": "git push --follow-tags",
+    "generate:readme": "tsx ./generate-readme.ts",
     "example": "tsx examples",
     "example:inspect": "tsx --inspect examples",
     "format": "eslint --ignore-path .gitignore --fix .",
