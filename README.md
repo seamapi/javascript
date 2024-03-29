@@ -31,6 +31,9 @@ Instead, it re-exports from a core set of Seam modules:
 [@seamapi/http]: https://github.com/seamapi/javascript-http
 [@seamapi/webhook]: https://github.com/seamapi/javascript-webhook
 
+
+## Contents
+
 <!-- toc -->
 
 - [Installation](#installation)
