@@ -68,5 +68,5 @@ ${updatedContent}
 
   const result = projectReadme.replace(usageRegex, injected)
 
-  await fs.writeFile('./README.md', result)
+  await fs.writeFile('README.md', result)
 }
