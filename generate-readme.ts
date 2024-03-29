@@ -36,7 +36,7 @@ async function writeReadmeUsage(content: string): Promise<void> {
     encoding: 'utf-8',
   })
 
-  const usageRegex = /### Usage\s*([\s\S]*?(?=\n## Development))/
+  const usageRegex = /## Usage\s*([\s\S]*?(?=\n## Development))/
 
   const matches = usageRegex.exec(projectReadme)
 

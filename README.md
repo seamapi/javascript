@@ -46,7 +46,7 @@ $ npm install seam
 
 [npm]: https://www.npmjs.com/
 
-### Usage
+## Usage
 
 #### Unlock a door
 
