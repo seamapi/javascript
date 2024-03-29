@@ -19,12 +19,7 @@ The SDK is fully tree-shakeable
 and optimized for use in both client and server applications.
 
 The repository does not contain the SDK code.
-Instead, it re-exports from a core set of Seam modules.
-
-_While this SDK is still in preview,
-please refer to the individual README files in these repositories for
-additional usage documentation not yet available in the primary Seam documentation.
-See [this issue for a draft migration guide](https://github.com/seamapi/javascript-next/issues/1) from the seamapi package._
+Instead, it re-exports from a core set of Seam modules:
 
 - [@seamapi/http]: JavaScript HTTP client for the Seam API written in TypeScript.
 - [@seamapi/webhook]: Webhook SDK for the Seam API written in TypeScript.
@@ -60,6 +55,7 @@ See [this issue for a draft migration guide](https://github.com/seamapi/javascri
     - [Using the Axios Client](#using-the-axios-client)
     - [Overriding the Client](#overriding-the-client)
     - [Inspecting the Request](#inspecting-the-request)
+  - [Webhooks](#webhooks)
 - [Development and Testing](#development-and-testing)
   - [Quickstart](#quickstart)
   - [Source code](#source-code)
@@ -85,45 +81,6 @@ $ npm install seam
 [npm]: https://www.npmjs.com/
 
 ## Usage
-
-First, create a webhook using the Seam API or Seam Console
-and obtain a Seam webhook secret.
-
-_This example is for [Express], see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how)._
-
-```js
-import { SeamWebhook } from 'seam'
-import express from 'express'
-import bodyParser from 'body-parser'
-
-import { storeEvent } from './store-event.js'
-
-const app = express()
-
-const webhook = new SeamWebhook(process.env.SEAM_WEBHOOK_SECRET)
-
-app.post(
-  '/webhook',
-  bodyParser.raw({ type: 'application/json' }),
-  (req, res) => {
-    let data
-    try {
-      data = webhook.verify(payload, headers)
-    } catch {
-      return res.status(400).send()
-    }
-
-    storeEvent(data, (err) => {
-      if (err != null) {
-        return res.status(500).send()
-      }
-      res.status(204).send()
-    })
-  },
-)
-```
-
-[Express]: https://expressjs.com/
 
 ### Examples
 
@@ -475,6 +432,46 @@ console.log(`${request.method} ${request.url}`, JSON.stringify(request.body))
 
 const devices = await request.execute()
 ```
+### Webhooks
+
+First, create a webhook using the Seam API or Seam Console
+and obtain a Seam webhook secret.
+
+_This example is for [Express], see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how)._
+
+```js
+import { SeamWebhook } from 'seam'
+import express from 'express'
+import bodyParser from 'body-parser'
+
+import { storeEvent } from './store-event.js'
+
+const app = express()
+
+const webhook = new SeamWebhook(process.env.SEAM_WEBHOOK_SECRET)
+
+app.post(
+  '/webhook',
+  bodyParser.raw({ type: 'application/json' }),
+  (req, res) => {
+    let data
+    try {
+      data = webhook.verify(payload, headers)
+    } catch {
+      return res.status(400).send()
+    }
+
+    storeEvent(data, (err) => {
+      if (err != null) {
+        return res.status(500).send()
+      }
+      res.status(204).send()
+    })
+  },
+)
+```
+
+[Express]: https://expressjs.com/
 
 ## Development and Testing
 
