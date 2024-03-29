@@ -5,10 +5,6 @@
 
 JavaScript SDK for the Seam API written in TypeScript.
 
-_This repository hosts the next major version of the Seam JavaScript SDK.
-This SDK is available for early preview.
-It will eventually replace the [seamapi](https://github.com/seamapi/javascript/) package._
-
 ## Description
 
 [Seam] makes it easy to integrate IoT devices with your applications.
@@ -19,12 +15,7 @@ The SDK is fully tree-shakeable
 and optimized for use in both client and server applications.
 
 The repository does not contain the SDK code.
-Instead, it re-exports from a core set of Seam modules.
-
-_While this SDK is still in preview,
-please refer to the individual README files in these repositories for
-additional usage documentation not yet available in the primary Seam documentation.
-See [this issue for a draft migration guide](https://github.com/seamapi/javascript-next/issues/1) from the seamapi package._
+Instead, it re-exports from a core set of Seam modules:
 
 - [@seamapi/http]: JavaScript HTTP client for the Seam API written in TypeScript.
 - [@seamapi/webhook]: Webhook SDK for the Seam API written in TypeScript.
@@ -35,6 +26,47 @@ See [this issue for a draft migration guide](https://github.com/seamapi/javascri
 [@seamapi/types]: https://github.com/seamapi/types
 [@seamapi/http]: https://github.com/seamapi/javascript-http
 [@seamapi/webhook]: https://github.com/seamapi/javascript-webhook
+
+## Contents
+
+<!-- toc -->
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Examples](#examples)
+    - [List devices](#list-devices)
+    - [Unlock a door](#unlock-a-door)
+  - [Authentication Methods](#authentication-methods)
+    - [API Key](#api-key)
+    - [Client Session Token](#client-session-token)
+    - [Publishable Key](#publishable-key)
+    - [Personal Access Token](#personal-access-token)
+    - [Console Session Token](#console-session-token)
+  - [Action Attempts](#action-attempts)
+  - [Interacting with Multiple Workspaces](#interacting-with-multiple-workspaces)
+    - [Personal Access Token](#personal-access-token-1)
+    - [Console Session Token](#console-session-token-1)
+  - [Advanced Usage](#advanced-usage)
+    - [Additional Options](#additional-options)
+    - [Setting the endpoint](#setting-the-endpoint)
+    - [Configuring the Axios Client](#configuring-the-axios-client)
+    - [Using the Axios Client](#using-the-axios-client)
+    - [Overriding the Client](#overriding-the-client)
+    - [Inspecting the Request](#inspecting-the-request)
+  - [Receiving Webhooks](#receiving-webhooks)
+- [Development and Testing](#development-and-testing)
+  - [Quickstart](#quickstart)
+  - [Source code](#source-code)
+  - [Requirements](#requirements)
+  - [Publishing](#publishing)
+    - [Automatic](#automatic)
+    - [Manual](#manual)
+- [GitHub Actions](#github-actions)
+- [Contributing](#contributing)
+- [License](#license)
+- [Warranty](#warranty)
+
+<!-- tocstop -->
 
 ## Installation
 
@@ -47,45 +79,6 @@ $ npm install seam
 [npm]: https://www.npmjs.com/
 
 ## Usage
-
-First, create a webhook using the Seam API or Seam Console
-and obtain a Seam webhook secret.
-
-_This example is for [Express], see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how)._
-
-```js
-import { SeamWebhook } from 'seam'
-import express from 'express'
-import bodyParser from 'body-parser'
-
-import { storeEvent } from './store-event.js'
-
-const app = express()
-
-const webhook = new SeamWebhook(process.env.SEAM_WEBHOOK_SECRET)
-
-app.post(
-  '/webhook',
-  bodyParser.raw({ type: 'application/json' }),
-  (req, res) => {
-    let data
-    try {
-      data = webhook.verify(payload, headers)
-    } catch {
-      return res.status(400).send()
-    }
-
-    storeEvent(data, (err) => {
-      if (err != null) {
-        return res.status(500).send()
-      }
-      res.status(204).send()
-    })
-  },
-)
-```
-
-[Express]: https://expressjs.com/
 
 ### Examples
 
@@ -437,6 +430,47 @@ console.log(`${request.method} ${request.url}`, JSON.stringify(request.body))
 
 const devices = await request.execute()
 ```
+
+### Receiving Webhooks
+
+First, create a webhook using the Seam API or Seam Console
+and obtain a Seam webhook secret.
+
+_This example is for [Express], see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how)._
+
+```js
+import { SeamWebhook } from 'seam'
+import express from 'express'
+import bodyParser from 'body-parser'
+
+import { storeEvent } from './store-event.js'
+
+const app = express()
+
+const webhook = new SeamWebhook(process.env.SEAM_WEBHOOK_SECRET)
+
+app.post(
+  '/webhook',
+  bodyParser.raw({ type: 'application/json' }),
+  (req, res) => {
+    let data
+    try {
+      data = webhook.verify(payload, headers)
+    } catch {
+      return res.status(400).send()
+    }
+
+    storeEvent(data, (err) => {
+      if (err != null) {
+        return res.status(500).send()
+      }
+      res.status(204).send()
+    })
+  },
+)
+```
+
+[Express]: https://expressjs.com/
 
 ## Development and Testing
 
