@@ -63,7 +63,6 @@ async function writeReadmeUsage(content: string): Promise<void> {
 
   const injected = `### Usage
 
-${currentUsageSection}
 ${updatedContent}
 `
 
