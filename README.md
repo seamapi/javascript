@@ -5,10 +5,6 @@
 
 JavaScript SDK for the Seam API written in TypeScript.
 
-_This repository hosts the next major version of the Seam JavaScript SDK.
-This SDK is available for early preview.
-It will eventually replace the [seamapi](https://github.com/seamapi/javascript/) package._
-
 ## Description
 
 [Seam] makes it easy to integrate IoT devices with your applications.
