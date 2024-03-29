@@ -86,12 +86,27 @@ app.post(
 ```
 
 [Express]: https://expressjs.com/
+### Examples
+
+_These examples assume `SEAM_API_KEY` is set in your environment._
+
+#### List devices
 
 ```ts
 import { Seam } from 'seam'
 
-const seam = new Seam('your-api-key')
+const seam = new Seam()
 const devices = await seam.devices.list()
+```
+
+#### Unlock a door
+
+```ts
+import { Seam } from 'seam'
+
+const seam = new Seam()
+const lock = await seam.locks.get({ name: 'Front Door' })
+await seam.locks.unlockDoor({ device_id: lock.device_id })
 ```
 
 ### Authentication Methods
@@ -137,7 +152,7 @@ const seam = Seam.fromClientSessionToken('some-client-session-token')
 
 The client session token may be updated using
 
-```
+```ts
 const seam = Seam.fromClientSessionToken('some-client-session-token')
 
 await seam.updateClientSessionToken('some-new-client-session-token')
