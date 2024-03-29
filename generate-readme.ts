@@ -33,7 +33,7 @@ async function readUsageSection(modulePath: string): Promise<string> {
 }
 
 async function writeReadmeUsage(content: string): Promise<void> {
-  const projectReadme = await fs.readFile('./README.md', {
+  const projectReadme = await fs.readFile('README.md', {
     encoding: 'utf-8',
   })
 
