@@ -36,6 +36,44 @@ See [this issue for a draft migration guide](https://github.com/seamapi/javascri
 [@seamapi/http]: https://github.com/seamapi/javascript-http
 [@seamapi/webhook]: https://github.com/seamapi/javascript-webhook
 
+<!-- toc -->
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Examples](#examples)
+    - [List devices](#list-devices)
+    - [Unlock a door](#unlock-a-door)
+  - [Authentication Methods](#authentication-methods)
+    - [API Key](#api-key)
+    - [Client Session Token](#client-session-token)
+    - [Publishable Key](#publishable-key)
+    - [Personal Access Token](#personal-access-token)
+    - [Console Session Token](#console-session-token)
+  - [Action Attempts](#action-attempts)
+  - [Interacting with Multiple Workspaces](#interacting-with-multiple-workspaces)
+    - [Personal Access Token](#personal-access-token-1)
+    - [Console Session Token](#console-session-token-1)
+  - [Advanced Usage](#advanced-usage)
+    - [Additional Options](#additional-options)
+    - [Setting the endpoint](#setting-the-endpoint)
+    - [Configuring the Axios Client](#configuring-the-axios-client)
+    - [Using the Axios Client](#using-the-axios-client)
+    - [Overriding the Client](#overriding-the-client)
+    - [Inspecting the Request](#inspecting-the-request)
+- [Development and Testing](#development-and-testing)
+  - [Quickstart](#quickstart)
+  - [Source code](#source-code)
+  - [Requirements](#requirements)
+  - [Publishing](#publishing)
+    - [Automatic](#automatic)
+    - [Manual](#manual)
+- [GitHub Actions](#github-actions)
+- [Contributing](#contributing)
+- [License](#license)
+- [Warranty](#warranty)
+
+<!-- tocstop -->
+
 ## Installation
 
 Add this as a dependency to your project using [npm] with
@@ -47,9 +85,6 @@ $ npm install seam
 [npm]: https://www.npmjs.com/
 
 ## Usage
-
-<!-- toc -->
-<!-- tocstop -->
 
 First, create a webhook using the Seam API or Seam Console
 and obtain a Seam webhook secret.
