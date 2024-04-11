@@ -3,7 +3,7 @@ import type { Builder, Command, Describe } from 'landlubber'
 import {
   isSeamActionAttemptFailedError,
   isSeamActionAttemptTimeoutError,
-  type LocksUnlockDoorResponse,
+  type LocksLockDoorResponse,
 } from 'seam'
 
 import type { Handler } from './index.js'
@@ -43,12 +43,12 @@ export const handler: Handler<Options> = async ({ deviceId, seam, logger }) => {
     )
     logger.info({ actionAttempt }, 'locked')
   } catch (err: unknown) {
-    if (isSeamActionAttemptFailedError<UnlockDoorActionAttempt>(err)) {
+    if (isSeamActionAttemptFailedError<LockDoorActionAttempt>(err)) {
       logger.info({ err }, 'Could not unlock the door')
       return
     }
 
-    if (isSeamActionAttemptTimeoutError<UnlockDoorActionAttempt>(err)) {
+    if (isSeamActionAttemptTimeoutError<LockDoorActionAttempt>(err)) {
       logger.info({ err }, 'Door took too long to unlock')
       return
     }
@@ -57,5 +57,5 @@ export const handler: Handler<Options> = async ({ deviceId, seam, logger }) => {
   }
 }
 
-// TODO: import type { UnlockDoorActionAttempt } from 'seam'
-type UnlockDoorActionAttempt = LocksUnlockDoorResponse['action_attempt']
+// TODO: import type { LockDoorActionAttempt } from 'seam'
+type LockDoorActionAttempt = LocksLockDoorResponse['action_attempt']
