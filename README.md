@@ -82,7 +82,8 @@ $ npm install seam
 
 ### Examples
 
-_These examples assume `SEAM_API_KEY` is set in your environment._
+> [!NOTE]
+> These examples assume `SEAM_API_KEY` is set in your environment.
 
 #### List devices
 
@@ -110,6 +111,7 @@ Authentication may be configured by passing the corresponding
 options directly to the `Seam` constructor,
 or with the more ergonomic static factory methods.
 
+> [!NOTE]
 > Publishable Key authentication is not supported by the constructor
 > and must be configured using `Seam.fromPublishableKey`.
 
@@ -430,7 +432,6 @@ console.log(`${request.method} ${request.url}`, JSON.stringify(request.body))
 
 const devices = await request.execute()
 ```
-
 ### Receiving Webhooks
 
 First, create a webhook using the Seam API or Seam Console
