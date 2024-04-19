@@ -438,7 +438,8 @@ const devices = await request.execute()
 First, create a webhook using the Seam API or Seam Console
 and obtain a Seam webhook secret.
 
-_This example is for [Express], see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how)._
+> [!TIP]
+> This example is for [Express], see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how).
 
 ```js
 import { SeamWebhook } from 'seam'
