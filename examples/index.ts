@@ -12,6 +12,7 @@ import landlubber, {
 
 import { Seam } from 'seam'
 
+import * as device from './device.js'
 import * as devices from './devices.js'
 import * as lock from './lock.js'
 import * as unlock from './unlock.js'
@@ -24,7 +25,7 @@ interface ClientContext {
   seam: Seam
 }
 
-const commands = [devices, lock, unlock]
+const commands = [device, devices, lock, unlock]
 
 const createAppContext: MiddlewareFunction = async (argv) => {
   const apiKey = argv['api-key']
