@@ -62,6 +62,7 @@ async function writeReadmeUsage(content: string): Promise<void> {
     .replaceAll('@seamapi/webhook', 'seam')
     .replaceAll('@seamapi/http', 'seam')
     .replaceAll('SeamHttp', 'Seam')
+    .replaceAll('SeamRequest', 'SeamHttpRequest')
     .replaceAll('seam/connect', 'seam')
 
   const currentUsageSection = matches[1]

@@ -420,8 +420,8 @@ This API is used internally and is not directly supported.
 
 #### Inspecting the Request
 
-All client methods return an instance of `SeamRequest`.
-Inspect the request before it is sent to the server by intentionally not awaiting the `SeamRequest`:
+All client methods return an instance of `SeamHttpRequest`.
+Inspect the request before it is sent to the server by intentionally not awaiting the `SeamHttpRequest`:
 
 ```ts
 const seam = new Seam('your-api-key')
