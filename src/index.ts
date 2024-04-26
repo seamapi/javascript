@@ -9,4 +9,4 @@ export * from '@seamapi/http/connect'
 export type * from '@seamapi/types/connect'
 export * from '@seamapi/webhook'
 export { Seam, SeamMultiWorkspace }
-export type { SeamMultiWorkspaceOptions,SeamOptions }
+export type { SeamMultiWorkspaceOptions, SeamOptions }
