@@ -356,7 +356,7 @@ const workspaces = await seam.workspaces.list()
 
 #### Additional Options
 
-In addition the various authentication options,
+In addition to the various authentication options,
 the constructor takes some advanced options that affect behavior.
 
 ```ts
