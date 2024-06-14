@@ -4,6 +4,9 @@ name: Check
 on:
   push:
     branches:
+      - main
+  pull_request:
+    branches:
       - '**'
 
 jobs:
@@ -84,19 +87,19 @@ jobs:
           name: ${{ needs.build.outputs.artifact_name }}
           path: .
       - name: Find packages
-        uses: tj-actions/glob@v17
+        uses: tj-actions/glob@v21
         id: packages
         with:
           files: '*.tgz'
       - name: Create package.json
-        uses: DamianReeves/write-file-action@v1.2
+        uses: DamianReeves/write-file-action@v1.3
         with:
           write-mode: overwrite
           path: package.json
           contents: |
             {"type":"module"}
       - name: Create index.js
-        uses: DamianReeves/write-file-action@v1.2
+        uses: DamianReeves/write-file-action@v1.3
         with:
           write-mode: overwrite
           path: index.js

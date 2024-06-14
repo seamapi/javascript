@@ -35,10 +35,10 @@ jobs:
           mkdir tmp
           outfile=tmp/changelog.txt
           echo "outfile=${outfile}" >> $GITHUB_OUTPUT
-          npx standard-changelog@^2.0.0 --release-count 2 --infile $outfile.tmp --outfile $outfile.tmp
+          npx standard-changelog@^5.0.0 --release-count 2 --infile $outfile.tmp --outfile $outfile.tmp
           sed '1,3d' $outfile.tmp > $outfile
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GH_TOKEN }}
           fail_on_unmatched_files: true
