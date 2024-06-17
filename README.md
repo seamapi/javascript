@@ -442,15 +442,15 @@ and obtain a Seam webhook secret.
 > This example is for [Express], see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how).
 
 ```js
+import { env } from 'node:process'
+
 import { SeamWebhook } from 'seam'
 import express from 'express'
 import bodyParser from 'body-parser'
 
-import { storeEvent } from './store-event.js'
-
 const app = express()
 
-const webhook = new SeamWebhook(process.env.SEAM_WEBHOOK_SECRET)
+const webhook = new SeamWebhook(env.SEAM_WEBHOOK_SECRET)
 
 app.post(
   '/webhook',
@@ -458,11 +458,10 @@ app.post(
   (req, res) => {
     let data
     try {
-      data = webhook.verify(payload, headers)
+      data = webhook.verify(req.body, req.headers)
     } catch {
       return res.status(400).send()
     }
-
     storeEvent(data, (err) => {
       if (err != null) {
         return res.status(500).send()
@@ -471,6 +470,15 @@ app.post(
     })
   },
 )
+
+const storeEvent = (data, callback) => {
+  console.log(data)
+  callback()
+}
+
+app.listen(8080, () => {
+  console.log('Ready to receive webhooks at http://localhost:8080/webhook')
+})
 ```
 
 [Express]: https://expressjs.com/
