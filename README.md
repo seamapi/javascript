@@ -175,7 +175,7 @@ or create a new empty client session.
 
 A Personal Access Token is scoped to a Seam Console user.
 Obtain one from the Seam Console.
-A workspace id must be provided when using this method
+A workspace ID must be provided when using this method
 and all requests will be scoped to that workspace.
 
 ```ts
@@ -197,7 +197,7 @@ const seam = Seam.fromPersonalAccessToken(
 
 A Console Session Token is used by the Seam Console.
 This authentication method is only used by internal Seam applications.
-A workspace id must be provided when using this method
+A workspace ID must be provided when using this method
 and all requests will be scoped to that workspace.
 
 ```ts
@@ -217,46 +217,13 @@ const seam = Seam.fromConsoleSessionToken(
 ### Action Attempts
 
 Some asynchronous operations, e.g., unlocking a door, return an [action attempt].
-Seam tracks the progress of requested operation and updates the action attempt.
+Seam tracks the progress of the requested operation and updates the action attempt
+when it succeeds or fails.
 
 To make working with action attempts more convenient for applications,
-this library provides the `waitForActionAttempt` option.
+this library provides the `waitForActionAttempt` option and enables it by default.
 
-Pass the option per-request,
-
-```ts
-await seam.locks.unlockDoor(
-  { device_id },
-  {
-    waitForActionAttempt: true,
-  },
-)
-```
-
-or set the default option for the client:
-
-```ts
-const seam = new Seam({
-  apiKey: 'your-api-key',
-  waitForActionAttempt: true,
-})
-
-await seam.locks.unlockDoor({ device_id })
-```
-
-If you have already have an action attempt id
-and want to wait for it to resolve, simply use
-
-```ts
-await seam.actionAttempts.get(
-  { action_attempt_id },
-  {
-    waitForActionAttempt: true,
-  },
-)
-```
-
-Using the `waitForActionAttempt` option:
+When the `waitForActionAttempt` option is enabled, the SDK:
 
 - Polls the action attempt up to the `timeout`
   at the `pollingInterval` (both in milliseconds).
@@ -265,6 +232,48 @@ Using the `waitForActionAttempt` option:
 - Rejects with a `SeamActionAttemptTimeoutError` if the action attempt is still pending when the `timeout` is reached.
 - Both errors expose an `actionAttempt` property.
 
+If you already have an action attempt ID
+and want to wait for it to resolve, simply use
+
+```ts
+await seam.actionAttempts.get({ action_attempt_id })
+```
+
+Or, to get the current state of an action attempt by ID without waiting,
+
+```ts
+await seam.actionAttempts.get(
+  { action_attempt_id },
+  {
+    waitForActionAttempt: false,
+  },
+)
+```
+
+To disable this behavior, set the default option for the client,
+
+```ts
+const seam = new Seam({
+  apiKey: 'your-api-key',
+  waitForActionAttempt: false,
+})
+
+await seam.locks.unlockDoor({ device_id })
+```
+
+or the behavior may be configured per-request,
+
+```ts
+await seam.locks.unlockDoor(
+  { device_id },
+  {
+    waitForActionAttempt: false,
+  },
+)
+```
+
+The `pollingInterval` and `timeout` may be configured for the client or per-request, for example
+
 ```ts
 import {
   Seam,
@@ -272,22 +281,19 @@ import {
   isSeamActionAttemptTimeoutError,
 } from 'seam'
 
-const seam = new Seam('your-api-key')
+const seam = new Seam('your-api-key', {
+  waitForActionAttempt: {
+    pollingInterval: 1000,
+    timeout: 5000,
+  },
+})
 
 const [lock] = await seam.locks.list()
 
 if (lock == null) throw new Error('No locks in this workspace')
 
 try {
-  await seam.locks.unlockDoor(
-    { device_id: lock.device_id },
-    {
-      waitForActionAttempt: {
-        pollingInterval: 1000,
-        timeout: 5000,
-      },
-    },
-  )
+  await seam.locks.unlockDoor({ device_id: lock.device_id })
   console.log('Door unlocked')
 } catch (err: unknown) {
   if (isSeamActionAttemptFailedError(err)) {
