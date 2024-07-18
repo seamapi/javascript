@@ -1,7 +1,7 @@
 # Seam JavaScript SDK
 
 [![npm](https://img.shields.io/npm/v/seam.svg)](https://www.npmjs.com/package/seam)
-[![GitHub Actions](https://github.com/seamapi/javascript-next/actions/workflows/check.yml/badge.svg)](https://github.com/seamapi/javascript-next/actions/workflows/check.yml)
+[![GitHub Actions](https://github.com/seamapi/javascript/actions/workflows/check.yml/badge.svg)](https://github.com/seamapi/javascript/actions/workflows/check.yml)
 
 JavaScript SDK for the Seam API written in TypeScript.
 
@@ -495,8 +495,8 @@ app.listen(8080, () => {
 ### Quickstart
 
 ```
-$ git clone https://github.com/seamapi/javascript-next.git
-$ cd javascript-next
+$ git clone https://github.com/seamapi/javascript.git
+$ cd javascript
 $ nvm install
 $ npm install
 ```
@@ -515,10 +515,10 @@ The [source code] is hosted on GitHub.
 Clone the project with
 
 ```
-$ git clone git@github.com:seamapi/javascript-next.git
+$ git clone git@github.com:seamapi/javascript.git
 ```
 
-[source code]: https://github.com/seamapi/javascript-next
+[source code]: https://github.com/seamapi/javascript
 
 ### Requirements
 
@@ -571,7 +571,7 @@ $ gh workflow run version.yml --raw-field version=<version>
 
 [GitHub CLI]: https://cli.github.com/
 [npm-version]: https://docs.npmjs.com/cli/version
-[version workflow_dispatch on GitHub Actions]: https://github.com/seamapi/javascript-next/actions?query=workflow%3Aversion
+[version workflow_dispatch on GitHub Actions]: https://github.com/seamapi/javascript/actions?query=workflow%3Aversion
 
 ## GitHub Actions
 

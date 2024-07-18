@@ -22,9 +22,9 @@
   "keywords": [
     "node"
   ],
-  "homepage": "https://github.com/seamapi/javascript-next",
-  "bugs": "https://github.com/seamapi/javascript-next/issues",
-  "repository": "seamapi/javascript-next",
+  "homepage": "https://github.com/seamapi/javascript",
+  "bugs": "https://github.com/seamapi/javascript/issues",
+  "repository": "seamapi/javascript",
   "license": "MIT",
   "author": {
     "name": "Seam Labs, Inc.",
