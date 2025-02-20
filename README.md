@@ -43,6 +43,11 @@ Instead, it re-exports from a core set of Seam modules:
     - [Personal Access Token](#personal-access-token)
     - [Console Session Token](#console-session-token)
   - [Action Attempts](#action-attempts)
+  - [Pagination](#pagination)
+    - [Manually fetch pages with the nextPageCursor](#manually-fetch-pages-with-the-nextpagecursor)
+    - [Iterate over all pages](#iterate-over-all-pages)
+    - [Iterate over all resources](#iterate-over-all-resources)
+    - [Return all resources across all pages as an array](#return-all-resources-across-all-pages-as-an-array)
   - [Interacting with Multiple Workspaces](#interacting-with-multiple-workspaces)
     - [Personal Access Token](#personal-access-token-1)
     - [Console Session Token](#console-session-token-1)
@@ -312,6 +317,67 @@ try {
 ```
 
 [action attempt]: https://docs.seam.co/latest/core-concepts/action-attempts
+
+### Pagination
+
+Some Seam API endpoints that return lists of resources support pagination.
+Use the `SeamPaginator` class to fetch and process resources across multiple pages.
+
+#### Manually fetch pages with the nextPageCursor
+
+```ts
+const pages = seam.createPaginator(
+  seam.devices.list({
+    limit: 20,
+  }),
+)
+
+const [devices, { hasNextPage, nextPageCursor }] = await pages.firstPage()
+
+if (hasNextPage) {
+  const [moreDevices] = await pages.nextPage(nextPageCursor)
+}
+```
+
+#### Iterate over all pages
+
+```ts
+const pages = seam.createPaginator(
+  seam.devices.list({
+    limit: 20,
+  }),
+)
+
+for await (const devices of pages) {
+  console.log(`There are ${devices.length} devices on this page.`)
+}
+```
+
+#### Iterate over all resources
+
+```ts
+const pages = seam.createPaginator(
+  seam.devices.list({
+    limit: 20,
+  }),
+)
+
+for await (const device of pages.flatten()) {
+  console.log(devices.name)
+}
+```
+
+#### Return all resources across all pages as an array
+
+```ts
+const pages = seam.createPaginator(
+  seam.devices.list({
+    limit: 20,
+  }),
+)
+
+const devices = await pages.toArray()
+```
 
 ### Interacting with Multiple Workspaces
 
