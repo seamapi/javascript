@@ -45,6 +45,7 @@ Instead, it re-exports from a core set of Seam modules:
   - [Action Attempts](#action-attempts)
   - [Pagination](#pagination)
     - [Manually fetch pages with the nextPageCursor](#manually-fetch-pages-with-the-nextpagecursor)
+    - [Resume pagination](#resume-pagination)
     - [Iterate over all pages](#iterate-over-all-pages)
     - [Iterate over all resources](#iterate-over-all-resources)
     - [Return all resources across all pages as an array](#return-all-resources-across-all-pages-as-an-array)
@@ -339,6 +340,32 @@ if (hasNextPage) {
 }
 ```
 
+#### Resume pagination
+
+Get the first page on initial load:
+
+```ts
+const params = { limit: 20 }
+
+const pages = seam.createPaginator(seam.devices.list(params))
+
+const [devices, pagination] = await pages.firstPage()
+
+localStorage.setItem('/seam/devices/list', JSON.stringify([params, pagination]))
+```
+
+Get the next page at a later time:
+
+```ts
+const [params = {}, { hasNextPage = false, nextPageCursor = null } = {}] =
+  JSON.parse(localStorage.getItem('/seam/devices/list') ?? '[]')
+
+if (hasNextPage) {
+  const pages = seam.createPaginator(seam.devices.list(params))
+  const [moreDevices] = await pages.nextPage(nextPageCursor)
+}
+```
+
 #### Iterate over all pages
 
 ```ts
@@ -376,7 +403,7 @@ const pages = seam.createPaginator(
   }),
 )
 
-const devices = await pages.toArray()
+const devices = await pages.flattenToArray()
 ```
 
 ### Interacting with Multiple Workspaces
