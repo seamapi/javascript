@@ -1,6 +1,6 @@
 {
   "name": "@seamapi/makenew-tsmodule",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Package skeleton for a TypeScript module.",
   "type": "module",
   "main": "index.js",
