@@ -185,8 +185,10 @@ A workspace ID must be provided when using this method
 and all requests will be scoped to that workspace.
 
 ```ts
-// Pass as an option to the constructor
+// Set the `SEAM_PERSONAL_ACCESS_TOKEN` and `SEAM_WORKSPACE_ID` environment variables
+const seam = new Seam()
 
+// Pass as an option to the constructor
 const seam = new Seam({
   personalAccessToken: 'your-personal-access-token',
   workspaceId: 'your-workspace-id',
@@ -418,6 +420,9 @@ A Personal Access Token is scoped to a Seam Console user.
 Obtain one from the Seam Console.
 
 ```ts
+// Set the `SEAM_PERSONAL_ACCESS_TOKEN` environment variable
+const seam = new SeamMultiWorkspace()
+
 // Pass as an option to the constructor
 const seam = new SeamMultiWorkspace({
   personalAccessToken: 'your-personal-access-token',
