@@ -20,8 +20,8 @@ jobs:
         os:
           - ubuntu-latest
         node:
-          - '18'
           - '20'
+          - '22'
         include:
           - os: ubuntu-latest
             os_name: Linux
@@ -43,8 +43,8 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - '18'
           - '20'
+          - '22'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -71,8 +71,8 @@ jobs:
         os:
           - ubuntu-latest
         node:
-          - '18'
           - '20'
+          - '22'
         include:
           - os: ubuntu-latest
             os_name: Linux
@@ -128,8 +128,8 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - '18'
           - '20'
+          - '22'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
