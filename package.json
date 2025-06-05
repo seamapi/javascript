@@ -1,6 +1,6 @@
 {
   "name": "@seamapi/makenew-tsmodule",
-  "version": "1.6.0",
+  "version": "1.6.2",
   "description": "Package skeleton for a TypeScript module.",
   "type": "module",
   "main": "index.js",
@@ -64,8 +64,8 @@
     "report": "c8 report"
   },
   "engines": {
-    "node": ">=22.11.0",
-    "npm": ">= 10.9.0"
+    "node": ">=20.9.0",
+    "npm": ">=10.1.0"
   },
   "devDependencies": {
     "@swc/core": "^1.11.29",
