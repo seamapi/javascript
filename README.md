@@ -58,6 +58,8 @@ Instead, it re-exports from a core set of Seam modules:
     - [Configuring the Axios Client](#configuring-the-axios-client)
     - [Using the Axios Client](#using-the-axios-client)
     - [Overriding the Client](#overriding-the-client)
+    - [Alternative endpoint path interface](#alternative-endpoint-path-interface)
+    - [Enable undocumented API](#enable-undocumented-api)
     - [Inspecting the Request](#inspecting-the-request)
   - [Receiving Webhooks](#receiving-webhooks)
 - [Development and Testing](#development-and-testing)
@@ -522,6 +524,31 @@ const devices = await seam.client.get<DevicesListResponse>('/devices/list')
 
 An Axios compatible client may be provided to create a `Seam` instance.
 This API is used internally and is not directly supported.
+
+#### Alternative endpoint path interface
+
+The `SeamEndpoints` class offers an alternative path-based interface to every API endpoint.
+Each endpoint is exposed as simple property that returns the corresponding method from `Seam`.
+
+```ts
+import { SeamEndpoints } from 'seam'
+
+const seam = new SeamEndpoints()
+const devices = await seam['/devices/list']()
+```
+
+#### Enable undocumented API
+
+Pass the `isUndocumentedApiEnabled` option to allow using the undocumented API.
+This API is used internally and is not directly supported.
+Do not use the undocumented API in production environments.
+Seam is not responsible for any issues you may encounter with the undocumented API.
+
+```ts
+import { Seam } from 'seam'
+
+const seam = new Seam({ isUndocumentedApiEnabled: true })
+```
 
 #### Inspecting the Request
 
