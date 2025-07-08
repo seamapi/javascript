@@ -11,7 +11,7 @@ import {
 export * from '@seamapi/http'
 export type * from '@seamapi/types'
 export * from '@seamapi/webhook'
-export { Seam, SeamEndpoints,SeamMultiWorkspace, SeamWithoutWorkspace }
+export { Seam, SeamEndpoints, SeamMultiWorkspace, SeamWithoutWorkspace }
 export type {
   SeamMultiWorkspaceOptions,
   SeamOptions,
