@@ -3,10 +3,10 @@ import {
   SeamHttpMultiWorkspace as SeamMultiWorkspace,
   type SeamHttpMultiWorkspaceOptions as SeamMultiWorkspaceOptions,
   type SeamHttpOptions as SeamOptions,
-} from '@seamapi/http/connect'
+} from '@seamapi/http'
 
-export * from '@seamapi/http/connect'
-export type * from '@seamapi/types/connect'
+export * from '@seamapi/http'
+export type * from '@seamapi/types'
 export * from '@seamapi/webhook'
 export { Seam, SeamMultiWorkspace }
 export type { SeamMultiWorkspaceOptions, SeamOptions }
