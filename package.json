@@ -54,13 +54,13 @@
     "test:update": "ava --update-snapshots",
     "test:watch": "ava --watch",
     "test:debug": "ava debug --break",
-    "lint": "eslint --ignore-path .gitignore .",
-    "prelint": "prettier --check --ignore-path .gitignore .",
+    "lint": "eslint .",
+    "postlint": "prettier --check --ignore-path .gitignore .",
     "postversion": "git push --follow-tags",
     "example": "tsx examples",
     "example:inspect": "tsx --inspect examples",
     "format": "prettier --write --ignore-path .gitignore .",
-    "postformat": "eslint --ignore-path .gitignore --fix .",
+    "preformat": "eslint --fix .",
     "report": "c8 report"
   },
   "engines": {
