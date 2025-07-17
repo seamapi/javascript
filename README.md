@@ -16,7 +16,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 - Package management with [npm].
 - Publish as a package to [GitHub Packages] and [npm].
 - Examples with configurable options and arguments powered by [yargs] with [landlubber].
-- Linting with the [JavaScript Standard Style] using [ESLint].
+- Linting with [eslint-config-love] using [ESLint].
 - [Prettier] code.
 - Futuristic debuggable unit testing with [AVA].
 - Code coverage reporting with [Istanbul] and [c8].
@@ -39,7 +39,7 @@ Bootstrap a new TypeScript module in five minutes or less.
 [GitHub Codespaces]: https://github.com/features/packages
 [GitHub Packages]: https://github.com/features/packages
 [Istanbul]: https://istanbul.js.org/
-[JavaScript Standard Style]: https://standardjs.com/
+[eslint-config-love]: https://github.com/mightyiam/eslint-config-love
 [Node.js]: https://nodejs.org/
 [Prettier]: https://prettier.io/
 [semantic-release]: https://semantic-release.gitbook.io/

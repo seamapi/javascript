@@ -19,5 +19,6 @@ export const builder: Builder = {
 }
 
 export const handler: Handler<Options> = async ({ x, logger }) => {
+  await Promise.resolve()
   logger.info({ data: todo(x) }, 'TODO')
 }

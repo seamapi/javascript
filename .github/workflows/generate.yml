@@ -34,7 +34,7 @@ jobs:
       - name: Normalize package-lock.json
         run: npm install
       - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: 'ci: Generate code'
           commit_user_name: ${{ secrets.GIT_USER_NAME }}
