@@ -215,7 +215,7 @@ The following repository secrets must be set on [GitHub Actions]:
 
 ## License
 
-This npm package is Copyright (c) 2021-2023 Seam Labs, Inc.
+This npm package is Copyright (c) 2021-2025 Seam Labs, Inc.
 
 ## Warranty
 
