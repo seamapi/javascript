@@ -37,6 +37,7 @@
     "lib",
     "src",
     "dist",
+    "!test",
     "!**/*.test.ts"
   ],
   "scripts": {
