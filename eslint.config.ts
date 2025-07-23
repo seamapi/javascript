@@ -1,30 +1,39 @@
 import { globalIgnores } from 'eslint/config'
-import love from 'eslint-config-love'
-import prettier from 'eslint-config-prettier/flat'
+import importPlugin from 'eslint-plugin-import'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import unusedImports from 'eslint-plugin-unused-imports'
+import neostandard, { resolveIgnoresFromGitignore } from 'neostandard'
 
 const files = ['**/*.{ts,tsx}']
 
 export default [
-  globalIgnores(['**/*.d.ts']),
+  globalIgnores(resolveIgnoresFromGitignore()),
+  ...neostandard({ ts: true, noStyle: true }),
   {
-    ...love,
     files,
     rules: {
-      ...love.rules,
-      'import/extensions': ['error', 'ignorePackages'],
-      'import/no-duplicates': ['error', { 'prefer-inline': true }],
-      'import/no-relative-parent-imports': 'error',
+      'no-console': 'error',
+      '@typescript-eslint/no-non-null-assertion': 'error',
     },
   },
   {
     files,
     plugins: {
       'unused-imports': unusedImports,
+      import: importPlugin,
     },
     rules: {
       '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-import-type-side-effects': 'error',
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          fixStyle: 'inline-type-imports',
+        },
+      ],
+      'import/extensions': ['error', 'ignorePackages'],
+      'import/no-duplicates': ['error', { 'prefer-inline': true }],
+      'import/no-relative-parent-imports': 'error',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'error',
@@ -61,5 +70,4 @@ export default [
       'simple-import-sort/exports': 'error',
     },
   },
-  { ...prettier, files },
 ]
