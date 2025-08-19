@@ -2,7 +2,6 @@ import type { Builder, Command, Describe } from 'landlubber'
 
 import type { Handler } from './index.js'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Options {}
 
 export const command: Command = 'devices'
