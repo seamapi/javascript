@@ -8,7 +8,7 @@ on:
         description: The Node.js version.
         type: string
         required: false
-        default: '20'
+        default: '22'
     outputs:
       artifact_name:
         description: The artifact name.

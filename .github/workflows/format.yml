@@ -32,7 +32,7 @@ jobs:
       - name: Format
         run: npm run format
       - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         if: always()
         with:
           commit_message: 'ci: Format code'
