@@ -9,6 +9,7 @@ import landlubber, {
   type Handler as DefaultHandler,
   type MiddlewareFunction,
 } from 'landlubber'
+
 import { Seam } from 'seam'
 
 import * as device from './device.js'
