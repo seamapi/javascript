@@ -65,9 +65,9 @@
     "npm": ">=10.1.0"
   },
   "dependencies": {
-    "@seamapi/http": "1.45.0",
-    "@seamapi/types": "1.441.1",
-    "@seamapi/webhook": "1.1.1",
+    "@seamapi/http": "1.70.0",
+    "@seamapi/types": "1.541.0",
+    "@seamapi/webhook": "1.2.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
