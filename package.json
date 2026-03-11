@@ -61,8 +61,8 @@
     "preformat": "eslint --fix ."
   },
   "engines": {
-    "node": ">=20.9.0",
-    "npm": ">=10.1.0"
+    "node": ">=22.11.0",
+    "npm": ">=10.9.4"
   },
   "dependencies": {
     "@seamapi/http": "1.102.0",
@@ -72,7 +72,7 @@
   },
   "devDependencies": {
     "@swc/core": "^1.11.29",
-    "@types/node": "^22.15.21",
+    "@types/node": "^24.10.9",
     "del-cli": "^6.0.0",
     "eslint": "^9.31.0",
     "eslint-plugin-import": "^2.32.0",

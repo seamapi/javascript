@@ -27,8 +27,6 @@ Instead, it re-exports from a core set of Seam modules:
 [@seamapi/http]: https://github.com/seamapi/javascript-http
 [@seamapi/webhook]: https://github.com/seamapi/javascript-webhook
 
-## Contents
-
 <!-- toc -->
 
 - [Installation](#installation)
@@ -707,7 +705,6 @@ _GitHub Actions should already be configured: this section is for reference only
 
 The following repository secrets must be set on [GitHub Actions]:
 
-- `NPM_TOKEN`: npm token for installing and publishing packages.
 - `GH_TOKEN`: A personal access token for the bot user with
   and `contents:write` permission.
 - `GIT_USER_NAME`: The GitHub bot user's real name.
