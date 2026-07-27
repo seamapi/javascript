@@ -30,11 +30,5 @@
     }
   },
   "files": ["src/index.ts"],
-  "include": [
-    "src/**/*",
-    "test/**/*",
-    "examples/**/*",
-    "eslint.config.ts",
-    "tsup.config.ts"
-  ]
+  "include": ["src/**/*", "test/**/*", "examples/**/*", "eslint.config.ts"]
 }
