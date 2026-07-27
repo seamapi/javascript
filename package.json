@@ -68,6 +68,16 @@
     "node": ">=22.11.0",
     "npm": ">=10.9.4"
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.11.0 || ^22.11.0"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": "^11.16.0 || ^10.9.4"
+    }
+  },
   "devDependencies": {
     "@swc/core": "^1.11.29",
     "@types/node": "^24.10.9",
