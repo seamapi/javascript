@@ -6,9 +6,8 @@
     "skipLibCheck": true,
     "strict": true,
     "module": "nodenext",
-    "esModuleInterop": true,
     "moduleDetection": "force",
-    "target": "es2023",
+    "target": "es2025",
     "jsx": "react-jsx",
     "sourceMap": true,
     "newLine": "lf",
@@ -24,18 +23,12 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./",
+    "types": ["node"],
     "paths": {
       "@seamapi/makenew-tsmodule": ["./src/index.ts"],
       "lib/*": ["./src/lib/*"]
     }
   },
   "files": ["src/index.ts"],
-  "include": [
-    "src/**/*",
-    "test/**/*",
-    "examples/**/*",
-    "eslint.config.ts",
-    "tsup.config.ts"
-  ]
+  "include": ["src/**/*", "test/**/*", "examples/**/*", "eslint.config.ts"]
 }

@@ -4,9 +4,7 @@ export default () => {
     ignoreChanges: {
       watchMode: ['tmp/**/*'],
     },
-    extensions: {
-      ts: 'commonjs',
-    },
+    extensions: ['ts'],
     nodeArguments: ['--import=tsx'],
   }
 }
