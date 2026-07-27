@@ -1,14 +1,16 @@
 {
   "name": "@seamapi/makenew-tsmodule",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Package skeleton for a TypeScript module.",
   "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "import": "./index.js"
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
     }
   },
   "module": "index.js",
