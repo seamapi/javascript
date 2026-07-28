@@ -57,7 +57,6 @@ Instead, it re-exports from a core set of Seam modules:
     - [Using the Axios Client](#using-the-axios-client)
     - [Overriding the Client](#overriding-the-client)
     - [Alternative endpoint path interface](#alternative-endpoint-path-interface)
-    - [Enable undocumented API](#enable-undocumented-api)
     - [Inspecting the Request](#inspecting-the-request)
   - [Receiving Webhooks](#receiving-webhooks)
 - [Development and Testing](#development-and-testing)
@@ -533,19 +532,6 @@ import { SeamEndpoints } from 'seam'
 
 const seam = new SeamEndpoints()
 const devices = await seam['/devices/list']()
-```
-
-#### Enable undocumented API
-
-Pass the `isUndocumentedApiEnabled` option to allow using the undocumented API.
-This API is used internally and is not directly supported.
-Do not use the undocumented API in production environments.
-Seam is not responsible for any issues you may encounter with the undocumented API.
-
-```ts
-import { Seam } from 'seam'
-
-const seam = new Seam({ isUndocumentedApiEnabled: true })
 ```
 
 #### Inspecting the Request

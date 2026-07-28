@@ -1,7 +1,6 @@
 import {
   SeamHttp as Seam,
   SeamHttpEndpoints as SeamEndpoints,
-  SeamHttpMultiWorkspace as SeamMultiWorkspace,
   type SeamHttpOptions as SeamOptions,
   SeamHttpWithoutWorkspace as SeamWithoutWorkspace,
   type SeamHttpWithoutWorkspace as SeamWithoutWorkspaceOptions,
@@ -9,9 +8,9 @@ import {
 } from '@seamapi/http'
 
 export * from '@seamapi/http'
-export type * from '@seamapi/types'
+export type { openapi } from '@seamapi/types'
 export * from '@seamapi/webhook'
-export { Seam, SeamEndpoints, SeamMultiWorkspace, SeamWithoutWorkspace }
+export { Seam, SeamEndpoints, SeamWithoutWorkspace }
 export type {
   SeamMultiWorkspaceOptions,
   SeamOptions,
