@@ -14,7 +14,13 @@
     }
   },
   "module": "index.js",
-  "sideEffects": false,
+  "bin": {
+    "seam": "./bin/seam.js"
+  },
+  "sideEffects": [
+    "./bin/seam.js",
+    "./src/bin/seam.ts"
+  ],
   "keywords": [
     "node"
   ],
@@ -30,6 +36,7 @@
     "index.js",
     "index.js.map",
     "index.d.ts",
+    "bin",
     "src"
   ],
   "scripts": {
@@ -38,7 +45,7 @@
     "postbuild": "node ./index.js",
     "build:entrypoints": "npm run build:ts",
     "build:ts": "tsc --project tsconfig.build.json",
-    "prebuild:ts": "del 'index.*'",
+    "prebuild:ts": "del 'index.*' bin",
     "postbuild:ts": "tsc-alias --project tsconfig.build.json",
     "typecheck": "tsc",
     "test": "true",
@@ -69,6 +76,7 @@
     }
   },
   "dependencies": {
+    "@seamapi/cli": "0.6.0",
     "@seamapi/http": "^2.2.0",
     "@seamapi/webhook": "1.4.0"
   },
