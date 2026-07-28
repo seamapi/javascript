@@ -9,6 +9,6 @@
     "rootDir": "./src",
     "outDir": "./"
   },
-  "files": ["src/index.ts"],
+  "files": ["src/index.ts", "src/bin/seam.ts"],
   "include": ["src/**/*"]
 }
