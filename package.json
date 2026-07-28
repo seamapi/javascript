@@ -60,7 +60,7 @@
   },
   "engines": {
     "node": ">=22.11.0",
-    "npm": ">=10.9.4"
+    "npm": ">=10.0.0"
   },
   "devEngines": {
     "runtime": {
@@ -69,7 +69,7 @@
     },
     "packageManager": {
       "name": "npm",
-      "version": "^11.12.0 || ^10.9.4"
+      "version": "^11.0.0 || ^10.0.0"
     }
   },
   "devDependencies": {
