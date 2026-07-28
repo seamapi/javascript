@@ -15,13 +15,15 @@ The SDK is fully tree-shakeable
 and optimized for use in both client and server applications.
 
 The repository does not contain the SDK code.
-Instead, it re-exports from a core set of Seam modules:
+Instead, it builds on a core set of Seam modules:
 
+- [@seamapi/cli]: Command line interface for interacting with the Seam API.
 - [@seamapi/http]: JavaScript HTTP client for the Seam API written in TypeScript.
 - [@seamapi/webhook]: Webhook SDK for the Seam API written in TypeScript.
 
 [Seam]: https://www.seam.co/
 [Seam Docs]: https://docs.seam.co/latest/
+[@seamapi/cli]: https://github.com/seamapi/cli
 [@seamapi/http]: https://github.com/seamapi/javascript-http
 [@seamapi/webhook]: https://github.com/seamapi/javascript-webhook
 
@@ -56,6 +58,7 @@ Instead, it re-exports from a core set of Seam modules:
     - [Overriding the Client](#overriding-the-client)
     - [Alternative endpoint path interface](#alternative-endpoint-path-interface)
     - [Inspecting the Request](#inspecting-the-request)
+  - [Command Line Interface](#command-line-interface)
   - [Receiving Webhooks](#receiving-webhooks)
 - [Development and Testing](#development-and-testing)
   - [Quickstart](#quickstart)
@@ -545,6 +548,40 @@ const request = seam.devices.list()
 console.log(`${request.method} ${request.url}`, JSON.stringify(request.body))
 
 const devices = await request.execute()
+```
+
+### Command Line Interface
+
+Every `seam` command is interactive and will prompt you for any missing
+required properties with helpful suggestions. To avoid automatic behavior,
+pass `-y`
+
+```bash
+# Login to Seam
+seam login
+
+# Select your workspace
+seam select workspace
+
+# Interactively select commands to execute
+seam
+
+# Create a connect webview to connect devices
+seam connect-webviews create
+
+# List devices in your workspace
+seam devices list
+
+MY_DOOR=$(seam devices get --name "Front Door" --id-only)
+
+# Unlock a lock
+seam locks unlock-door --device-id $MY_DOOR
+
+# Create an access code
+seam access-codes create --code "1234" --name "My Code"
+
+# List your access codes
+seam access-codes list --device-id $MY_DOOR
 ```
 
 ### Receiving Webhooks

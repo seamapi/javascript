@@ -14,6 +14,10 @@ const submodules: Submodule[] = [
     readmePath: path.join('node_modules', '@seamapi', 'http', readmeName),
   },
   {
+    heading: 'Command Line Interface',
+    readmePath: path.join('node_modules', '@seamapi', 'cli', readmeName),
+  },
+  {
     heading: 'Receiving Webhooks',
     readmePath: path.join('node_modules', '@seamapi', 'webhook', readmeName),
   },
@@ -59,6 +63,7 @@ async function writeReadmeUsage(content: string): Promise<void> {
   }
 
   const updatedContent = content
+    .replaceAll('@seamapi/cli', 'seam')
     .replaceAll('@seamapi/webhook', 'seam')
     .replaceAll('@seamapi/http', 'seam')
     .replaceAll('SeamHttp', 'Seam')
