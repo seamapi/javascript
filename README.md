@@ -19,11 +19,9 @@ Instead, it re-exports from a core set of Seam modules:
 
 - [@seamapi/http]: JavaScript HTTP client for the Seam API written in TypeScript.
 - [@seamapi/webhook]: Webhook SDK for the Seam API written in TypeScript.
-- [@seamapi/types]: TypeScript types for the Seam API.
 
 [Seam]: https://www.seam.co/
 [Seam Docs]: https://docs.seam.co/latest/
-[@seamapi/types]: https://github.com/seamapi/types
 [@seamapi/http]: https://github.com/seamapi/javascript-http
 [@seamapi/webhook]: https://github.com/seamapi/javascript-webhook
 
