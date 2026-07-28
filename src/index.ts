@@ -8,7 +8,7 @@ import {
 } from '@seamapi/http'
 
 export * from '@seamapi/http'
-export type { openapi} from '@seamapi/types'
+export type { openapi } from '@seamapi/types'
 export * from '@seamapi/webhook'
 export { Seam, SeamEndpoints, SeamWithoutWorkspace }
 export type {
