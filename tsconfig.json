@@ -5,9 +5,8 @@
     "skipLibCheck": true,
     "strict": true,
     "module": "nodenext",
-    "esModuleInterop": true,
     "moduleDetection": "force",
-    "target": "es2023",
+    "target": "es2025",
     "jsx": "react-jsx",
     "declaration": true,
     "sourceMap": true,
@@ -24,7 +23,7 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./",
+    "types": ["node"],
     "paths": {
       "seam": ["./src/index.ts"]
     }
@@ -34,7 +33,6 @@
     "src/**/*",
     "examples/**/*",
     "eslint.config.ts",
-    "tsup.config.ts",
     "generate-readme.ts"
   ]
 }

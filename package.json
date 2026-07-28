@@ -10,10 +10,6 @@
       "import": {
         "types": "./index.d.ts",
         "default": "./index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
       }
     }
   },
@@ -34,15 +30,13 @@
     "index.js",
     "index.js.map",
     "index.d.ts",
-    "src",
-    "dist"
+    "src"
   ],
   "scripts": {
     "build": "npm run build:entrypoints",
     "prebuild": "tsx src/index.ts",
     "postbuild": "node ./index.js",
     "build:entrypoints": "npm run build:ts",
-    "postbuild:entrypoints": "tsup",
     "build:ts": "tsc --project tsconfig.build.json",
     "prebuild:ts": "del 'index.*'",
     "postbuild:ts": "tsc-alias --project tsconfig.build.json",
@@ -62,14 +56,23 @@
   },
   "engines": {
     "node": ">=22.11.0",
-    "npm": ">=10.9.4"
+    "npm": ">=10.0.0"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.11.0 || ^22.11.0"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": "^11.0.0 || ^10.0.0"
+    }
   },
   "dependencies": {
     "@seamapi/http": "^2.2.0",
     "@seamapi/webhook": "1.4.0"
   },
   "devDependencies": {
-    "@swc/core": "^1.11.29",
     "@types/node": "^24.10.9",
     "del-cli": "^6.0.0",
     "eslint": "^9.31.0",
@@ -79,11 +82,10 @@
     "jiti": "^2.4.2",
     "landlubber": "^2.0.0",
     "markdown-toc": "^1.2.0",
-    "neostandard": "^0.12.2",
+    "neostandard": "^0.13.0",
     "prettier": "^3.0.0",
     "tsc-alias": "^1.8.2",
-    "tsup": "^8.0.1",
     "tsx": "^4.6.2",
-    "typescript": "^5.8.3"
+    "typescript": "^6.0.3"
   }
 }
