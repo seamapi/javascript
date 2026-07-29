@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.9",
-    "del-cli": "^6.0.0",
+    "del-cli": "^7.0.0",
     "eslint": "^9.31.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
