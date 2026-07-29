@@ -106,7 +106,9 @@ jobs:
       - name: Run
         run: node index.js
       - name: Run CLI
-        run: npx --yes --package ${{ steps.packages.outputs.paths }} seam --version
+        run: |
+          npx --yes --package ${{ steps.packages.outputs.paths }} seam --version
+          npx --yes --package ${{ steps.packages.outputs.paths }} seam wizard --version
   typecheck:
     name: Typecheck (Node.js v${{ matrix.node }})
     runs-on: ubuntu-latest
