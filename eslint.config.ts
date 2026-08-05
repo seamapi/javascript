@@ -22,6 +22,16 @@ export default [
       'unused-imports': unusedImports,
       import: importPlugin,
     },
+    settings: {
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx'],
+      },
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
+      },
+    },
     rules: {
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-import-type-side-effects': 'error',
@@ -31,9 +41,25 @@ export default [
           fixStyle: 'inline-type-imports',
         },
       ],
-      'import/extensions': ['error', 'ignorePackages'],
       'import/no-duplicates': ['error', { 'prefer-inline': true }],
-      'import/no-relative-parent-imports': 'error',
+      'import/no-cycle': [
+        'error',
+        {
+          ignoreExternal: true,
+        },
+      ],
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['..', '../**'],
+              message:
+                'Import by path alias instead, e.g., lib/foo/bar.js or test/fixtures/blueprint.js.',
+            },
+          ],
+        },
+      ],
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'error',
@@ -61,7 +87,7 @@ export default [
             ['^node:'],
             ['^@?\\w'],
             ['@seamapi/makenew-tsmodule'],
-            ['^lib/'],
+            ['^lib/', '^test/'],
             ['^'],
             ['^\\.'],
           ],
