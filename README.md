@@ -53,12 +53,18 @@ Instead, it builds on a core set of Seam modules:
   - [Advanced Usage](#advanced-usage)
     - [Additional Options](#additional-options)
     - [Setting the endpoint](#setting-the-endpoint)
+    - [Setting the request timeout](#setting-the-request-timeout)
     - [Configuring the Axios Client](#configuring-the-axios-client)
     - [Using the Axios Client](#using-the-axios-client)
     - [Overriding the Client](#overriding-the-client)
     - [Alternative endpoint path interface](#alternative-endpoint-path-interface)
     - [Inspecting the Request](#inspecting-the-request)
   - [Command Line Interface](#command-line-interface)
+  - [Output](#output)
+  - [Pagination](#pagination-1)
+  - [JSON](#json)
+  - [Selecting an endpoint and a workspace](#selecting-an-endpoint-and-a-workspace)
+  - [Environment variables](#environment-variables)
   - [Receiving Webhooks](#receiving-webhooks)
 - [Development and Testing](#development-and-testing)
   - [Quickstart](#quickstart)
@@ -468,6 +474,7 @@ the constructor takes some advanced options that affect behavior.
 const seam = new Seam({
   apiKey: 'your-api-key',
   endpoint: 'https://example.com',
+  timeout: 30000,
   axiosOptions: {},
   axiosRetryOptions: {},
 })
@@ -479,6 +486,7 @@ these options may be passed in as the last argument.
 ```ts
 const seam = Seam.fromApiKey('some-api-key', {
   endpoint: 'https://example.com',
+  timeout: 30000,
   axiosOptions: {},
   axiosRetryOptions: {},
 })
@@ -491,6 +499,22 @@ e.g., testing or proxy setups.
 This option corresponds to the Axios `baseURL` setting.
 
 Either pass the `endpoint` option, or set the `SEAM_ENDPOINT` environment variable.
+
+#### Setting the request timeout
+
+Requests time out after 30 seconds by default.
+Pass the `timeout` option, in milliseconds, to override this:
+
+```ts
+const seam = new Seam({
+  apiKey: 'your-api-key',
+  timeout: 60000,
+})
+```
+
+Set `timeout` to `0` to disable the timeout entirely.
+A request that times out rejects with an Axios `ETIMEDOUT` error,
+and is retried according to the retry options.
 
 #### Configuring the Axios Client
 
@@ -552,9 +576,19 @@ const devices = await request.execute()
 
 ### Command Line Interface
 
-Every `seam` command is interactive and will prompt you for any missing
-required properties with helpful suggestions. To avoid automatic behavior,
-pass `-y`.
+Every `seam` command makes its request as soon as every required property is
+given. When something is missing, the CLI prompts you for it with helpful
+suggestions.
+
+Pass `--interactive` (or `-i`) to always be prompted to review and edit
+properties before the request is made. The prompt is prefilled with whatever
+you passed as arguments, so this is the way to add optional properties, or to
+check a request before making it.
+
+For scripts and CI, pass `--non-interactive` (or `-y`) to never be prompted.
+The command must then be complete: if the command itself is ambiguous, or any
+required property is missing, the CLI exits with an error naming what is
+missing instead of asking for it.
 
 To take a project from zero to a working Seam integration, run the
 [Seam Wizard] from the project's root:
@@ -581,7 +615,19 @@ seam connect-webviews create
 # List devices in your workspace
 seam devices list
 
-MY_DOOR=$(seam devices get --name "Front Door" --id-only)
+# Review and edit filters before listing devices
+seam devices list --interactive
+
+# List devices, failing instead of prompting
+seam devices list --non-interactive
+
+# Fails with: Missing required parameter for /locks/unlock_door: --device-id
+seam locks unlock-door --non-interactive
+
+# Fails with: Unknown parameter for /devices/list: --limitt
+seam devices list --limitt 5
+
+MY_DOOR=$(seam devices get --name "Front Door" | jq -r '.device.device_id')
 
 # Unlock a lock
 seam locks unlock-door --device-id $MY_DOOR
@@ -591,6 +637,160 @@ seam access-codes create --code "1234" --name "My Code"
 
 # List your access codes
 seam access-codes list --device-id $MY_DOOR
+```
+
+### Output
+
+Only the response is written to stdout, so any command may be piped or
+redirected. Prompts, progress, and other information are written to stderr.
+
+The response is trimmed to the response key and pagination: no other top level
+fields are reported.
+
+```bash
+# The response, and nothing else, ends up in the file
+seam devices list > devices.json
+
+# Prompts and progress still show up in the terminal
+seam devices list | jq '.devices[].device_id'
+```
+
+### Pagination
+
+Every command that paginates accepts `--page-cursor` to select a page of
+results, alongside `--limit` for the size of that page. Each response reports
+its `pagination`, whose `next_page_cursor` is the cursor for the page after it.
+
+```bash
+# The first page, and the cursor for the next one
+seam devices list --limit 2 | jq '.pagination.next_page_cursor'
+
+# The page after it
+seam devices list --limit 2 --page-cursor "$CURSOR"
+```
+
+A cursor is opaque: pass it back exactly as it was reported, and do not build
+one yourself. Run `seam <command> --help` to see whether a command paginates.
+
+### JSON
+
+Request params may be piped or redirected in as a JSON object. Params given as
+arguments win over params read from stdin.
+
+An argument the command does not accept is an error, so a typo is reported
+rather than sent. Params read from stdin are passed through as given, so
+anything the API itself accepts may be sent that way.
+
+```bash
+# Read params from a file
+seam locks unlock-door < params.json
+
+# Or from another program
+echo '{"device_id": "'"$MY_DOOR"'"}' | seam locks unlock-door
+
+# --device-id wins over any device_id in params.json
+seam devices list --limit 5 < params.json
+```
+
+Pass `--json` to write the response as JSON. It is enabled automatically
+whenever stdout is not a terminal, so piping and redirecting produce JSON
+without passing anything. Pass `--no-json` to opt out and get the pretty
+format instead.
+
+```bash
+# Both write JSON
+seam devices list --json
+seam devices list | jq
+
+# Pretty printed, even though it is piped
+seam devices list --no-json | less
+```
+
+Without a terminal to prompt on, the CLI behaves as though
+`--non-interactive` was given: rather than waiting for an answer nobody can
+give, it exits with an error naming what is missing.
+
+```bash
+$ echo '{}' | seam locks unlock-door
+Missing required parameter for /locks/unlock_door: --device-id
+```
+
+An error exits non-zero. A request that fails reports its `error` on stdout,
+so it can be inspected from a pipe; anything else is written to stderr only.
+
+### Selecting an endpoint and a workspace
+
+Two settings say where commands go, and one command each stores them:
+
+```bash
+# Every later command runs against this endpoint
+seam select endpoint https://connect.getseam.com
+
+# ...and this workspace
+seam select workspace $MY_WORKSPACE
+```
+
+Run either without a value to pick one interactively.
+
+To send a single command somewhere else, pass `--endpoint` or
+`--workspace-id` to that command. They override what is selected for that one
+invocation and store nothing:
+
+```bash
+# List devices in another workspace, without switching to it
+seam devices list --workspace-id $OTHER_WORKSPACE
+
+# Run one command against a local Seam Connect instance
+seam devices list --endpoint http://localhost:3020
+
+# Log in to another endpoint: the token is stored for that endpoint,
+# and the selected one is left alone
+seam login --endpoint http://localhost:3020 --token $LOCAL_KEY
+```
+
+Because the two flags never store anything, they are refused on the commands
+that do: `seam select endpoint --endpoint <url>` is an error, and the value
+belongs after the command instead.
+
+### Environment variables
+
+Everything `seam login`, `seam select workspace`, and `seam select endpoint`
+store may be given in the environment instead:
+
+- `SEAM_CLI_TOKEN`: a Personal Access Token or API Key,
+- `SEAM_CLI_WORKSPACE_ID`: the workspace requests are made against,
+- `SEAM_CLI_ENDPOINT`: the Seam API endpoint requests are made to.
+
+Any of them, all of them, or none of them may be set. Each one wins over the
+corresponding stored value and is in turn overridden by `--endpoint` or
+`--workspace-id`, which makes them useful for CI or for working against
+another workspace for a whole shell.
+
+```bash
+# One command against another workspace
+SEAM_CLI_WORKSPACE_ID=$OTHER_WORKSPACE seam devices list
+
+# No login needed: authenticate from the environment
+export SEAM_CLI_TOKEN=$SEAM_API_KEY
+seam devices list
+
+# Work against a local Seam Connect instance
+SEAM_CLI_ENDPOINT=http://localhost:3020 seam devices list
+```
+
+An API Key is scoped to a single workspace, so it needs no workspace id. A
+Personal Access Token works across workspaces, so it needs one from
+`--workspace-id`, `SEAM_CLI_WORKSPACE_ID`, or `seam select workspace`.
+
+The command that would store an overridden value fails rather than storing
+something the environment ignores: `seam login` and `seam logout` while
+`SEAM_CLI_TOKEN` is set, `seam select workspace` while
+`SEAM_CLI_WORKSPACE_ID` is set, and `seam select endpoint` while
+`SEAM_CLI_ENDPOINT` is set. Unset the variable to use those commands.
+
+```bash
+$ SEAM_CLI_TOKEN=$SEAM_API_KEY seam login
+Cannot log in while SEAM_CLI_TOKEN is set: it overrides what would be stored. Unset SEAM_CLI_TOKEN to log in.
 ```
 
 ### Receiving Webhooks
