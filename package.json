@@ -1,6 +1,6 @@
 {
   "name": "@seamapi/makenew-tsmodule",
-  "version": "3.0.11",
+  "version": "3.0.12",
   "description": "Package skeleton for a TypeScript module.",
   "type": "module",
   "main": "index.js",
@@ -70,6 +70,7 @@
       "version": "^11.0.0 || ^10.0.0"
     }
   },
+  "packageManager": "npm@11.19.0",
   "devDependencies": {
     "@types/node": "^24.10.9",
     "ava": "^8.0.1",
