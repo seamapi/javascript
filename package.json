@@ -78,6 +78,7 @@
     "@seamapi/http": "2.3.1",
     "@seamapi/webhook": "1.4.1"
   },
+  "packageManager": "npm@11.19.0",
   "devDependencies": {
     "@types/node": "^24.10.9",
     "del-cli": "^7.0.0",
