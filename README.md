@@ -59,6 +59,7 @@ Instead, it builds on a core set of Seam modules:
     - [Overriding the Client](#overriding-the-client)
     - [Alternative endpoint path interface](#alternative-endpoint-path-interface)
     - [Inspecting the Request](#inspecting-the-request)
+    - [Serializing URL search params](#serializing-url-search-params)
   - [Command Line Interface](#command-line-interface)
   - [Output](#output)
   - [Pagination](#pagination-1)
@@ -513,14 +514,25 @@ const seam = new Seam({
 ```
 
 Set `timeout` to `0` to disable the timeout entirely.
-A request that times out rejects with an Axios `ETIMEDOUT` error,
-and is retried according to the retry options.
+A request that times out rejects with an Axios `ETIMEDOUT` error.
+Timed-out idempotent requests are retried according to the retry options, with
+the timeout reset for each attempt. Non-idempotent requests are not retried by
+default.
 
 #### Configuring the Axios Client
 
 The Axios client and retry behavior may be configured with custom initiation options
 via [`axiosOptions`][axiosOptions] and [`axiosRetryOptions`][axiosRetryOptions].
 Options are deep merged with the default options.
+
+By default, the SDK makes up to three attempts: the initial request and two
+retries. Retries are limited to `GET`, `HEAD`, `OPTIONS`, `PUT`, and `DELETE`
+requests that fail because of a transport error, timeout, HTTP 429 response, or
+HTTP 5xx response. `POST` and `PATCH` requests are not retried.
+
+Retries use exponential backoff with jitter: approximately 200–240 ms before
+the first retry and 400–480 ms before the second. A longer `Retry-After` header
+is honored. The request timeout is reset for each attempt.
 
 [axiosOptions]: https://axios-http.com/docs/config_defaults
 [axiosRetryOptions]: https://github.com/softonic/axios-retry
@@ -574,6 +586,53 @@ console.log(`${request.method} ${request.url}`, JSON.stringify(request.body))
 const devices = await request.execute()
 ```
 
+#### Serializing URL search params
+
+The Seam API parses URL search params as complex types.
+If you call it with your own HTTP client, use `serializeUrlSearchParams`:
+
+```ts
+import axios from 'axios'
+import { serializeUrlSearchParams } from 'seam'
+
+await axios.get('https://connect.getseam.com/devices/list', {
+  params: { device_ids: ['device1', 'device2'] },
+  paramsSerializer: serializeUrlSearchParams,
+  headers: { Authorization: 'Bearer your-api-key' },
+})
+```
+
+or `updateUrlSearchParams`:
+
+```ts
+import { updateUrlSearchParams } from 'seam'
+
+const searchParams = new URLSearchParams()
+updateUrlSearchParams(searchParams, { device_ids: ['device1', 'device2'] })
+
+Array.from(searchParams)
+// => [['device_ids', 'device1'], ['device_ids', 'device2'], ['_strict', 'true']]
+
+searchParams.toString()
+// => 'device_ids=device1&device_ids=device2&_strict=true'
+```
+
+The helpers wrap the [reference implementation].
+The serialization defines the name and string value of each search param.
+[`URLSearchParams`][URLSearchParams] holds those pairs and renders the query string:
+The `_strict=true` parameter is added to any non-empty query so the Seam API uses
+strict, schema-aware parsing.
+A query with no serializable params remains empty.
+
+A param set to `undefined` is omitted, while a param set to `null` is serialized
+to an empty value, which the Seam API reads as null.
+A param that cannot be represented raises an `UnserializableParamError`.
+The Seam API parses these params with the corresponding [parser].
+
+[URLSearchParams]: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+[reference implementation]: https://github.com/seamapi/url-search-params-serializer
+[parser]: https://github.com/seamapi/url-search-params-parser
+
 ### Command Line Interface
 
 Every `seam` command makes its request as soon as every required property is
@@ -582,8 +641,9 @@ suggestions.
 
 Pass `--interactive` (or `-i`) to always be prompted to review and edit
 properties before the request is made. The prompt is prefilled with whatever
-you passed as arguments, so this is the way to add optional properties, or to
-check a request before making it.
+you passed as arguments or piped in as JSON, and each property you open is
+prefilled with the value it has, ready to edit rather than retype. This is the
+way to add optional properties, or to check a request before making it.
 
 For scripts and CI, pass `--non-interactive` (or `-y`) to never be prompted.
 The command must then be complete: if the command itself is ambiguous, or any
@@ -674,8 +734,8 @@ one yourself. Run `seam <command> --help` to see whether a command paginates.
 
 ### JSON
 
-Request params may be piped or redirected in as a JSON object. Params given as
-arguments win over params read from stdin.
+Request params may be piped or redirected in as a JSON object, or passed
+inline with `--raw`. Params given as arguments win over raw or stdin params.
 
 An argument the command does not accept is an error, so a typo is reported
 rather than sent. Params read from stdin are passed through as given, so
@@ -687,6 +747,9 @@ seam locks unlock-door < params.json
 
 # Or from another program
 echo '{"device_id": "'"$MY_DOOR"'"}' | seam locks unlock-door
+
+# Pass request params inline as JSON
+seam devices list --raw '{"search":"bar"}'
 
 # --device-id wins over any device_id in params.json
 seam devices list --limit 5 < params.json
