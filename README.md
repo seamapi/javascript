@@ -47,6 +47,8 @@ Instead, it builds on a core set of Seam modules:
     - [Iterate over all pages](#iterate-over-all-pages)
     - [Iterate over all resources](#iterate-over-all-resources)
     - [Return all resources across all pages as an array](#return-all-resources-across-all-pages-as-an-array)
+  - [Error Handling](#error-handling)
+    - [Validation errors](#validation-errors)
   - [Requests without a Workspace in scope](#requests-without-a-workspace-in-scope)
     - [Personal Access Token](#personal-access-token-1)
     - [Console Session Token](#console-session-token-1)
@@ -242,6 +244,11 @@ When the `waitForActionAttempt` option is enabled, the SDK:
 
 - Polls the action attempt up to the `timeout`
   at the `pollingInterval` (both in milliseconds).
+  Polling stops as soon as the `timeout` passes,
+  and every wait polls at least once,
+  even when the `timeout` is shorter than the `pollingInterval`.
+  The `timeout` must not be negative,
+  and the `pollingInterval` must be greater than zero.
 - Resolves with a fresh copy of the successful action attempt.
 - Rejects with a `SeamActionAttemptFailedError` if the action attempt is unsuccessful.
 - Rejects with a `SeamActionAttemptTimeoutError` if the action attempt is still pending when the `timeout` is reached.
@@ -413,6 +420,43 @@ const pages = seam.createPaginator(
 )
 
 const devices = await pages.flattenToArray()
+```
+
+### Error Handling
+
+Requests rejected by the Seam API throw a `SeamApiError` subclass
+carrying the `statusCode`, the API error `code`, and the `requestId`.
+The originating Axios error is retained as the standard `cause`.
+
+#### Validation errors
+
+When the API rejects a request because a parameter is invalid,
+it throws a `SeamInvalidInputError`.
+
+Look up the messages for a parameter you are already rendering,
+for example a field in a form:
+
+```ts
+import { isSeamInvalidInputError } from 'seam'
+
+try {
+  await seam.devices.list({ device_ids: ['not-a-uuid'] })
+} catch (err) {
+  if (isSeamInvalidInputError(err)) {
+    console.log(err.getValidationErrorMessages('device_ids'))
+  }
+}
+```
+
+Or read every parameter that failed validation,
+for example to show a summary of what went wrong:
+
+```ts
+if (isSeamInvalidInputError(err)) {
+  for (const { parameterName, errorMessages } of err.validationErrors) {
+    console.log(`${parameterName}: ${errorMessages.join(', ')}`)
+  }
+}
 ```
 
 ### Requests without a Workspace in scope
