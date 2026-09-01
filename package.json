@@ -77,7 +77,7 @@
   "dependencies": {
     "@seamapi/cli": "0.37.0",
     "@seamapi/http": "2.26.0",
-    "@seamapi/webhook": "1.4.1"
+    "@seamapi/webhook": "1.5.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.9",
