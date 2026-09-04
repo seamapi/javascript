@@ -254,6 +254,31 @@ When the `waitForActionAttempt` option is enabled, the SDK:
 - Rejects with a `SeamActionAttemptTimeoutError` if the action attempt is still pending when the `timeout` is reached.
 - Both errors expose an `actionAttempt` property.
 
+The `ActionAttempt` type is a union discriminated by `action_type` and `status`.
+The `error` and `result` properties are typed as `null`
+except for the status that populates them,
+so narrow on the `status` before reading them:
+
+```ts
+const actionAttempt = await seam.locks.unlockDoor(
+  { device_id },
+  { waitForActionAttempt: false },
+)
+
+if (actionAttempt.status === 'success') {
+  console.log(actionAttempt.result) // The result is non-null here.
+}
+
+if (actionAttempt.status === 'error') {
+  console.log(actionAttempt.error.message) // The error is non-null here.
+}
+```
+
+Waiting for an action attempt resolves with the successful action attempt,
+so after checking `status === 'success'` the `result` is immediately usable.
+Use the `SucceededActionAttempt` and `FailedActionAttempt` types
+to extract the success and error members from any action attempt type.
+
 If you already have an action attempt ID
 and want to wait for it to resolve, simply use
 
