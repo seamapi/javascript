@@ -1,6 +1,6 @@
 {
   "name": "seam",
-  "version": "1.243.0",
+  "version": "1.245.0",
   "description": "JavaScript SDK for the Seam API written in TypeScript.",
   "type": "module",
   "main": "index.js",
@@ -75,8 +75,8 @@
   },
   "packageManager": "npm@11.19.0",
   "dependencies": {
-    "@seamapi/cli": "0.41.0",
-    "@seamapi/http": "2.31.0",
+    "@seamapi/cli": "0.42.0",
+    "@seamapi/http": "2.32.0",
     "@seamapi/webhook": "1.5.0"
   },
   "devDependencies": {
