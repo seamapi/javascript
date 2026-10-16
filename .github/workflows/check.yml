@@ -18,12 +18,12 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-latest
+          - namespace-profile-npm-test
         node:
           - '22'
           - '24'
         include:
-          - os: ubuntu-latest
+          - os: namespace-profile-npm-test
             os_name: Linux
     steps:
       - name: Checkout
@@ -36,7 +36,7 @@ jobs:
         run: npm test
   lint:
     name: Lint (Node.js v${{ matrix.node }})
-    runs-on: ubuntu-latest
+    runs-on: namespace-profile-codegen
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -65,12 +65,12 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-latest
+          - namespace-profile-codegen
         node:
           - '22'
           - '24'
         include:
-          - os: ubuntu-latest
+          - os: namespace-profile-codegen
             os_name: Linux
     steps:
       - name: Setup Node.js
@@ -111,7 +111,7 @@ jobs:
           npx --yes --package ${{ steps.packages.outputs.paths }} seam wizard --version
   typecheck:
     name: Typecheck (Node.js v${{ matrix.node }})
-    runs-on: ubuntu-latest
+    runs-on: namespace-profile-codegen
     timeout-minutes: 30
     strategy:
       fail-fast: false
