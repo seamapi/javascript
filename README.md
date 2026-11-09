@@ -604,6 +604,18 @@ Retries use exponential backoff with jitter: approximately 200–240 ms before
 the first retry and 400–480 ms before the second. A longer `Retry-After` header
 is honored. The request timeout is reset for each attempt.
 
+Retries are configured per client. If your application has its own retry
+behavior for some calls, create a second client with retries disabled and send
+those calls through it, while other calls keep the default retries:
+
+```ts
+const seam = Seam.fromApiKey('some-api-key')
+
+const seamWithoutRetries = Seam.fromApiKey('some-api-key', {
+  axiosRetryOptions: { retries: 0 },
+})
+```
+
 [axiosOptions]: https://axios-http.com/docs/config_defaults
 [axiosRetryOptions]: https://github.com/softonic/axios-retry
 
