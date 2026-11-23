@@ -953,12 +953,19 @@ Use it to parse and validate [Seam webhook events](https://docs.seam.co/latest/d
 Refer to the [Svix docs on Consuming Webhooks](https://docs.svix.com/receiving/introduction)
 for an in-depth guide on best-practices for handling webhooks in your application.
 
+`new SeamWebhook()` reads `SEAM_WEBHOOK_SECRET` when set.
+Otherwise, pass your webhook signing secret explicitly with `new SeamWebhook(secret)`.
+An explicit secret takes precedence over the environment variable.
+
 Verification failures throw Svix's `WebhookVerificationError`, re-exported as
 `SeamWebhookVerificationError`.
 A payload that is correctly signed but unreadable throws a `SeamInvalidWebhookPayloadError`.
 
 ```js
 import { isSeamInvalidWebhookPayloadError, SeamWebhook } from 'seam'
+
+const webhook = new SeamWebhook(secret)
+let data
 
 try {
   data = webhook.verify(req.body, req.headers)
@@ -976,15 +983,13 @@ try {
 > see the [Svix docs for more examples in specific frameworks](https://docs.svix.com/receiving/verifying-payloads/how).
 
 ```js
-import { env } from 'node:process'
-
 import { SeamWebhook } from 'seam'
 import express from 'express'
 import bodyParser from 'body-parser'
 
 const app = express()
 
-const webhook = new SeamWebhook(env.SEAM_WEBHOOK_SECRET)
+const webhook = new SeamWebhook() // Uses SEAM_WEBHOOK_SECRET.
 
 app.post(
   '/webhook',
