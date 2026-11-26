@@ -76,7 +76,7 @@
   "packageManager": "npm@11.19.0",
   "dependencies": {
     "@seamapi/cli": "0.60.0",
-    "@seamapi/http": "2.55.0",
+    "@seamapi/http": "2.56.0",
     "@seamapi/webhook": "1.6.0"
   },
   "devDependencies": {
